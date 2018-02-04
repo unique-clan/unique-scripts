@@ -1,0 +1,17 @@
+@name|Race Short
+sv_server_type "Short"
+clear_votes
+
+@heading|Server
+@switch|Short|exec race/votes_short.cfg|on
+@switch|Middle|exec race/votes_middle.cfg
+@switch|Long|exec race/votes_long.cfg
+
+@heading|New Maps
+exec race/mapsnew_short.cfg
+
+@heading|Maps
+@option|Random Short Map|random_map
+@option|Random Short Map Unfinished|random_unfinished_map
+@comment|
+exec race/maps_short.cfg

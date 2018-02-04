@@ -1,0 +1,4 @@
+PATH=/srv/tw/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+
+# clean up worse ranks every night
+24 3    * * *   racecleanranks

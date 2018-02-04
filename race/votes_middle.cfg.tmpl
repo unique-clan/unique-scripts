@@ -1,0 +1,17 @@
+@name|Race Middle
+sv_server_type "Middle"
+clear_votes
+
+@heading|Server
+@switch|Short|exec race/votes_short.cfg
+@switch|Middle|exec race/votes_middle.cfg|on
+@switch|Long|exec race/votes_long.cfg
+
+@heading|New Maps
+exec race/mapsnew_middle.cfg
+
+@heading|Maps
+@option|Random Middle Map|random_map
+@option|Random Middle Map Unfinished|random_unfinished_map
+@comment|
+exec race/maps_middle.cfg

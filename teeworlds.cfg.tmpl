@@ -1,0 +1,25 @@
+exec port.cfg
+exec motd.cfg
+exec bans.cfg
+
+sv_register 1
+
+sv_max_clients 16
+sv_max_clients_per_ip 1
+sv_spectator_slots 0
+
+@passwd|rcon|rcon
+
+console_output_level 0
+logfile "server.log"
+
+sv_rcon_max_tries 60
+sv_rcon_bantime 0
+
+sv_auto_demo_record 0
+
+sv_tournament_mode 0
+
+sv_vote_kick 0
+
+sv_inactivekick_time 0

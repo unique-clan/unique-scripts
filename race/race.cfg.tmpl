@@ -1,0 +1,27 @@
+exec ddrace.cfg
+
+exec sql.cfg
+sv_save_worse_scores 0
+sv_map_vote 1
+
+@sqlserver|race
+
+sv_max_clients_per_ip 2
+sv_tournament_mode 1
+
+sv_announcement_filename race/announcements.txt
+sv_announcement_interval 30
+sv_announcement_random 1
+
+@passwd|helper|race_helper
+access_level status 2
+access_level vote 2
+access_level force_vote 2
+access_level ban 2
+access_level bans 2
+access_level unban 2
+access_level kick 2
+access_level logout 2
+access_level change_map 2
+
+sv_reset_file reset.cfg
