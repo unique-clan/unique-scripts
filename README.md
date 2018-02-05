@@ -2,6 +2,7 @@ macOS / Linux dependencies
 --------------------------
 pip:
 ``sudo pip install requests``
+
 or easy_install:
 ``sudo easy_install -U requests``
 
