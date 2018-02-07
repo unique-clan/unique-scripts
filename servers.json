@@ -1,6 +1,6 @@
-{
-    "GER":
+[
     {
+        "name": "GER",
         "ip": "84.38.65.222",
         "servers":
         {
@@ -24,8 +24,8 @@
             "fly":       { "port": "8320", "name": "Fly" }
         }
     },
-    "FRA":
     {
+        "name": "FRA",
         "ip": "164.132.59.136",
         "servers":
         {
@@ -35,8 +35,8 @@
             "teesmash":  { "port": "8306", "name": "TeeSmash" }
         }
     },
-    "CAN":
     {
+        "name": "CAN",
         "ip": "144.217.93.75",
         "servers":
         {
@@ -46,4 +46,4 @@
             "teesmash":  { "port": "8306", "name": "TeeSmash" }
         }
     }
-}
+]

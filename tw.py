@@ -16,7 +16,9 @@ with open(os.path.join(basedir, 'local_config.json')) as configfile:
 with open(os.path.join(srcdir, 'mods.json')) as modsfile:
     srcmods = json.load(modsfile)
 with open(os.path.join(basedir, 'servers.json')) as serversfile:
-    servers = json.load(serversfile)[config['location']]['servers']
+    for location in json.load(serversfile):
+        if location['name'] == config['location']:
+            servers = location['servers']
 with open(os.path.join(basedir, 'passwords.json')) as pwsfile:
     passwords = json.load(pwsfile)
 

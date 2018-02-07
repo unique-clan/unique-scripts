@@ -4,6 +4,7 @@ import time
 import requests
 import signal
 
+sys.path.append('/srv/tw')
 import tw
 
 running = True
