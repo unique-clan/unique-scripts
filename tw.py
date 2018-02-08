@@ -19,6 +19,7 @@ with open(os.path.join(basedir, 'servers.json')) as serversfile:
     for location in json.load(serversfile):
         if location['name'] == config['location']:
             servers = location['servers']
+            break
 with open(os.path.join(basedir, 'passwords.json')) as pwsfile:
     passwords = json.load(pwsfile)
 

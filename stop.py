@@ -6,7 +6,7 @@ import signal
 import tw
 
 
-servers = tw.select_items(tw.servers.keys(), sys.argv[1:])
+servers = tw.select_items([s['dir'] for s in tw.servers], sys.argv[1:])
 for server in servers:
     pidpath = os.path.join(tw.basedir, server, 'server.pid')
     if os.path.isfile(pidpath):

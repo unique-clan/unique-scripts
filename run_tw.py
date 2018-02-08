@@ -17,17 +17,23 @@ if len(sys.argv) <= 1:
     sys.exit()
 
 server = sys.argv[1]
-if server not in tw.servers:
+for srvdata in tw.servers:
+    if srvdata['dir'] == server:
+        break
+else:
     print("No such server")
     sys.exit()
 
 serverdir = os.path.join(tw.basedir, server)
 logpath = os.path.join(serverdir, 'server.log')
+portpath = os.path.join(serverdir, 'port.cfg')
 
 signal.signal(signal.SIGINT, stop)
 signal.signal(signal.SIGTERM, stop)
 
 while True:
+    with open(portpath, 'w') as portfile:
+        portfile.write('sv_port {}'.format(srvdata['port']))
     if os.path.isfile(logpath):
         os.rename(logpath, logpath+'.old')
     with open(logpath, 'w') as logfile:

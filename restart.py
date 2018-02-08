@@ -6,8 +6,8 @@ import subprocess
 import tw
 
 
-servers = tw.select_items(tw.servers.keys(), sys.argv[1:])
-subprocess.run([os.path.join(tw.basedir, 'stop.py')] + list(servers))
+servers = tw.select_items([s['dir'] for s in tw.servers], sys.argv[1:])
+subprocess.run([os.path.join(tw.basedir, 'stop.py')] + servers)
 for server in servers:
     p = subprocess.Popen([os.path.join(tw.basedir, 'run_tw.py'), server],
                          preexec_fn=os.setpgrp)
