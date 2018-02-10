@@ -4,24 +4,24 @@
         "ip": "84.38.65.222",
         "servers":
         [
-            { "port": "8303", "dir": "openfng",   "name": "OpenFNG" },
-            { "port": "8304", "dir": "boomfng1",  "name": "BoomFNG 1" },
-            { "port": "8305", "dir": "boomfng2",  "name": "BoomFNG 2" },
-            { "port": "8306", "dir": "solofng",   "name": "SoloFNG" },
-            { "port": "8307", "dir": "instagib",  "name": "Instagib" },
-            { "port": "8308", "dir": "monster",   "name": "HMH-Monster" },
-            { "port": "8309", "dir": "acception", "name": "Acception Test" },
-            { "port": "8310", "dir": "freeze",    "name": "FreeZe" },
-            { "port": "8311", "dir": "vanilla",   "name": "Vanilla" },
-            { "port": "8312", "dir": "bomb",      "name": "Bomb" },
-            { "port": "8313", "dir": "race1",     "name": "Race 1" },
-            { "port": "8314", "dir": "race2",     "name": "Race 2" },
-            { "port": "8315", "dir": "race3",     "name": "Race 3" },
-            { "port": "8316", "dir": "football",  "name": "Football" },
-            { "port": "8317", "dir": "gores",     "name": "Gores" },
-            { "port": "8318", "dir": "teesmash",  "name": "TeeSmash" },
-            { "port": "8319", "dir": "race_test", "name": "Race Test" },
-            { "port": "8320", "dir": "fly",       "name": "Fly" }
+            { "port": 8303, "dir": "openfng",   "name": "OpenFNG" },
+            { "port": 8304, "dir": "boomfng1",  "name": "BoomFNG 1" },
+            { "port": 8305, "dir": "boomfng2",  "name": "BoomFNG 2" },
+            { "port": 8306, "dir": "solofng",   "name": "SoloFNG" },
+            { "port": 8307, "dir": "instagib",  "name": "Instagib" },
+            { "port": 8308, "dir": "monster",   "name": "HMH-Monster" },
+            { "port": 8309, "dir": "acception", "name": "Acception Test" },
+            { "port": 8310, "dir": "freeze",    "name": "FreeZe" },
+            { "port": 8311, "dir": "vanilla",   "name": "Vanilla" },
+            { "port": 8312, "dir": "bomb",      "name": "Bomb" },
+            { "port": 8313, "dir": "race1",     "name": "Race 1" },
+            { "port": 8314, "dir": "race2",     "name": "Race 2" },
+            { "port": 8315, "dir": "race3",     "name": "Race 3" },
+            { "port": 8316, "dir": "football",  "name": "Football" },
+            { "port": 8317, "dir": "gores",     "name": "Gores" },
+            { "port": 8318, "dir": "teesmash",  "name": "TeeSmash" },
+            { "port": 8319, "dir": "race_test", "name": "Race Test" },
+            { "port": 8320, "dir": "fly",       "name": "Fly" }
         ]
     },
     {
@@ -29,10 +29,10 @@
         "ip": "164.132.59.136",
         "servers":
         [
-            { "port": "8303", "dir": "race1",     "name": "Race 1" },
-            { "port": "8304", "dir": "race2",     "name": "Race 2" },
-            { "port": "8305", "dir": "fly",       "name": "Fly" },
-            { "port": "8306", "dir": "teesmash",  "name": "TeeSmash" }
+            { "port": 8303, "dir": "race1",     "name": "Race 1" },
+            { "port": 8304, "dir": "race2",     "name": "Race 2" },
+            { "port": 8305, "dir": "fly",       "name": "Fly" },
+            { "port": 8306, "dir": "teesmash",  "name": "TeeSmash" }
         ]
     },
     {
@@ -40,10 +40,10 @@
         "ip": "144.217.93.75",
         "servers":
         [
-            { "port": "8303", "dir": "race1",     "name": "Race 1" },
-            { "port": "8304", "dir": "race2",     "name": "Race 2" },
-            { "port": "8305", "dir": "fly",       "name": "Fly" },
-            { "port": "8306", "dir": "teesmash",  "name": "TeeSmash" }
+            { "port": 8303, "dir": "race1",     "name": "Race 1" },
+            { "port": 8304, "dir": "race2",     "name": "Race 2" },
+            { "port": 8305, "dir": "fly",       "name": "Fly" },
+            { "port": 8306, "dir": "teesmash",  "name": "TeeSmash" }
         ]
     }
 ]
