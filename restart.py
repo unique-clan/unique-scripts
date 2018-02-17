@@ -6,6 +6,8 @@ import subprocess
 import tw
 
 
+subprocess.run(os.path.join(tw.basedir, 'build_config.py'))
+
 servers = tw.select_items([s['dir'] for s in tw.servers], sys.argv[1:])
 subprocess.run([os.path.join(tw.basedir, 'stop.py')] + servers)
 for server in servers:
