@@ -52,5 +52,5 @@ clone()
 EOF
 }
 
-clone 144.217.93.75
+clone 54.39.23.96
 clone teeland.ovh
