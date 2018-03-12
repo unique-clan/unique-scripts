@@ -28,8 +28,6 @@ with tw.RecordDB() as db:
 
         with db.commit as c:
             c.execute("DELETE FROM race_recordqueue WHERE Timestamp < (NOW() - INTERVAL 3 SECOND)")
-            c.execute("DELETE FROM race_lastrecords WHERE id NOT IN (SELECT id FROM (SELECT id FROM race_lastrecords ORDER BY Timestamp DESC LIMIT 10) t)")
-
             c.execute("SELECT u1.Id, u1.Map, u1.Name, u1.Timestamp, u1.Time FROM race_recordqueue u1 INNER JOIN (SELECT MIN(t1.Id) AS minId FROM race_recordqueue t1 INNER JOIN (SELECT Map, MIN(Time) AS minTime FROM race_recordqueue GROUP BY Map) t2 ON t1.Map = t2.Map AND t1.Time = t2.minTime GROUP BY t1.Map) u2 ON u1.Id = u2.minId WHERE u1.Id > %s AND u1.Timestamp > (NOW() - INTERVAL 2 SECOND)", (currentid, ))
             for row in c.fetchall():
                 currentid = row[0]
