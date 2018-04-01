@@ -53,4 +53,3 @@ EOF
 }
 
 clone 54.39.23.96
-clone teeland.net

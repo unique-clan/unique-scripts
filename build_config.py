@@ -52,7 +52,7 @@ class Config:
     _wrote_welcome = False
     def _welcome(self):
         self._content('Welcome to ᴜɴɪǫᴜᴇ,')
-        self._content('Visit ᴜɴɪǫᴜᴇ-cʟᴀɴ.ᴛᴋ!')
+        self._content('Visit uniqueclan.net!')
         self._vote('╰───────────────────╯')
         self._wrote_welcome = True
 
