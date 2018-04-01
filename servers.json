@@ -25,17 +25,6 @@
         ]
     },
     {
-        "name": "FRA",
-        "ip": "164.132.59.136",
-        "servers":
-        [
-            { "port": 8303, "dir": "race1",     "name": "Race 1" },
-            { "port": 8304, "dir": "race2",     "name": "Race 2" },
-            { "port": 8305, "dir": "fly",       "name": "Fly" },
-            { "port": 8306, "dir": "teesmash",  "name": "TeeSmash" }
-        ]
-    },
-    {
         "name": "CAN",
         "ip": "54.39.23.96",
         "servers":
