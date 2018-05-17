@@ -1,9 +1,9 @@
-You can use /showothers to hide others!
-Visit https://uniqueclan.net for more information!
+You can use /showothers to hide other players!
 When you're tired playing a long map use /save to continue another day
 Use the /map command to change to your favorite maps fast
-Want to get your maps on the unique servers? Visit http://uniqueclan.net!
+Want to get your maps on the Unique Race servers? Visit uniqueclan.net/submit
 Have fun & be fast in your races!
-When you are rank 1 and the flag is annoying you, use /showflag to hide it!
+When you are rank 1 and the flag feels annoying use /showflag to hide it!
 Use your hammer to display everyones precise time in the scoreboard
 We have a time based point system! Check out /mappoints /points and /top5points
+View the scores and rankings of all players at uniqueclan.net/ranks
