@@ -101,6 +101,8 @@ class Config:
             self._command('sv_rcon_password', tw.passwords[name])
         elif pwtype == 'helper':
             self._command('sv_rcon_helper_password', tw.passwords[name])
+        elif pwtype == 'econ':
+            self._command('ec_password', tw.passwords[name])
 
     _heading_end_space = 0
     def _heading_end(self):

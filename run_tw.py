@@ -33,7 +33,8 @@ signal.signal(signal.SIGTERM, stop)
 
 while True:
     with open(portpath, 'w') as portfile:
-        portfile.write('sv_port {}'.format(srvdata['port']))
+        portfile.write('sv_port {}\n'.format(srvdata['port']))
+        portfile.write('ec_port {}\n'.format(srvdata['port']))
     if os.path.isfile(logpath):
         os.rename(logpath, logpath+'.old')
     with open(logpath, 'w') as logfile:
