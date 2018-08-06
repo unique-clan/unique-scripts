@@ -30,9 +30,11 @@ with tw.RecordDB() as db:
         c.execute("DELETE FROM race_points WHERE Points = 0")
         points_deleted = c.rowcount
         c.execute("DELETE FROM race_catpoints WHERE Points = 0")
+        points_deleted += c.rowcount
         c.execute("INSERT INTO race_points SELECT Name, SUM(mapPoints) FROM (SELECT t1.Name as Name, FLOOR(100*EXP(-S*(playerTime/bestTime-1))) as mapPoints FROM (SELECT Map, Name, ROUND(MIN(Time), 3) AS playerTime FROM race_race GROUP BY Map, Name) t1 INNER JOIN (SELECT Map, ROUND(MIN(Time), 3) AS bestTime FROM race_race GROUP BY Map) t2 ON t1.Map = t2.Map INNER JOIN (SELECT Map, CASE WHEN Server = 'Short' THEN 5.0 WHEN Server = 'Middle' THEN 3.5 WHEN Server = 'Long' THEN CASE WHEN Stars = 0 THEN 2.0 WHEN Stars = 1 THEN 1.0 WHEN Stars = 2 THEN 0.05 END END AS S FROM race_maps) t3 ON t1.Map = t3.Map) t WHERE mapPoints != 0 GROUP BY Name ON DUPLICATE KEY UPDATE Points=VALUES(Points)")
         points_corrected = c.rowcount
         c.execute("INSERT INTO race_catpoints SELECT Server, Name, SUM(mapPoints) FROM (SELECT Server, t1.Name as Name, FLOOR(100*EXP(-S*(playerTime/bestTime-1))) as mapPoints FROM (SELECT Map, Name, ROUND(MIN(Time), 3) AS playerTime FROM race_race GROUP BY Map, Name) t1 INNER JOIN (SELECT Map, ROUND(MIN(Time), 3) AS bestTime FROM race_race GROUP BY Map) t2 ON t1.Map = t2.Map INNER JOIN (SELECT Server, Map, CASE WHEN Server = 'Short' THEN 5.0 WHEN Server = 'Middle' THEN 3.5 WHEN Server = 'Long' THEN CASE WHEN Stars = 0 THEN 2.0 WHEN Stars = 1 THEN 1.0 WHEN Stars = 2 THEN 0.05 END END AS S FROM race_maps) t3 ON t1.Map = t3.Map) t WHERE mapPoints != 0 GROUP BY Server, Name ON DUPLICATE KEY UPDATE Points=VALUES(Points)")
+        points_corrected += c.rowcount
 
 print("Successfully deleted {} worse ranks".format(deleted_total))
 print("Successfully deleted {} zero point entries".format(points_deleted))
