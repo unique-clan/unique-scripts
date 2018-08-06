@@ -17,12 +17,12 @@
             { "port": 8313, "dir": "race1",     "name": "Race 1" },
             { "port": 8314, "dir": "race2",     "name": "Race 2" },
             { "port": 8315, "dir": "race3",     "name": "Race 3" },
-            { "port": 8316, "dir": "football1",  "name": "Football 1" },
+            { "port": 8316, "dir": "football1", "name": "Football 1" },
             { "port": 8317, "dir": "gores",     "name": "Gores" },
             { "port": 8318, "dir": "teesmash",  "name": "TeeSmash" },
             { "port": 8319, "dir": "race_test", "name": "Race Test" },
             { "port": 8320, "dir": "fly",       "name": "Fly" },
-            { "port": 8321, "dir": "football2",  "name": "Football 2" }
+            { "port": 8321, "dir": "football2", "name": "Football 2" }
         ]
     },
     {
@@ -34,8 +34,8 @@
             { "port": 8304, "dir": "race2",     "name": "Race 2" },
             { "port": 8305, "dir": "fly",       "name": "Fly" },
             { "port": 8306, "dir": "teesmash",  "name": "TeeSmash" },
-            { "port": 8307, "dir": "football1",  "name": "Football 1" },
-            { "port": 8308, "dir": "football2",  "name": "Football 2" }
+            { "port": 8307, "dir": "football1", "name": "Football 1" },
+            { "port": 8308, "dir": "football2", "name": "Football 2" }
         ]
     }
 ]
