@@ -3,6 +3,7 @@ import sys
 import os
 import subprocess
 import signal
+import time
 
 import tw
 
@@ -40,3 +41,4 @@ while True:
     with open(logpath, 'w') as logfile:
         p = subprocess.Popen('./teeworlds_srv', cwd=serverdir, stdout=logfile, stderr=logfile)
         p.wait()
+    time.sleep(1)
