@@ -15,12 +15,6 @@ signal.signal(signal.SIGTERM, handle_sigterm)
 signal.signal(signal.SIGINT, handle_sigterm)
 
 with tw.RecordDB() as db:
-    with db.query as c:
-        c.execute("CREATE TABLE IF NOT EXISTS race_recordqueue (Id INT UNSIGNED NOT NULL AUTO_INCREMENT, Map VARCHAR(128) BINARY NOT NULL, Name VARCHAR(16) BINARY NOT NULL, Timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, Time FLOAT DEFAULT 0, PRIMARY KEY(Id)) CHARACTER SET utf8mb4")
-        c.execute("CREATE TABLE IF NOT EXISTS race_lastrecords (Id INT UNSIGNED NOT NULL AUTO_INCREMENT, Map VARCHAR(128) BINARY NOT NULL, Name VARCHAR(16) BINARY NOT NULL, Timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, Time FLOAT DEFAULT 0, PRIMARY KEY(Id)) CHARACTER SET utf8mb4")
-        c.execute("CREATE TABLE IF NOT EXISTS race_catpoints (Server VARCHAR(32) BINARY NOT NULL, Name VARCHAR(16) BINARY NOT NULL, Points INT DEFAULT 0, UNIQUE KEY (Server, Name)) CHARACTER SET utf8mb4")
-        c.execute("CREATE TABLE IF NOT EXISTS race_ranks (Map VARCHAR(128) BINARY NOT NULL, Name VARCHAR(16) BINARY NOT NULL, Rank INT, UNIQUE KEY (Map, Name)) CHARACTER SET utf8mb4")
-
     currentid = 0
     nexttime = time.time()
     while running:

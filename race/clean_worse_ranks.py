@@ -1,23 +1,11 @@
 #!/usr/bin/python3
 import sys
-import os
-import warnings
 import time
-import MySQLdb
 
 sys.path.append('/srv/tw')
 import tw
 
 
-class NotDeletedError(Exception):
-    pass
-
-
-# we don't use binary logs so we can ignore this
-warnings.filterwarnings('ignore', "Unsafe statement written to the binary log using statement format since BINLOG_FORMAT = STATEMENT\. The statement is unsafe because it uses a LIMIT clause\. This is unsafe because the set of rows included cannot be predicted\.", category=MySQLdb.Warning)
-
-
-deleted_total = 0
 with tw.RecordDB() as db:
     with db.commit as c:
         # delete worse ranks
@@ -34,13 +22,28 @@ with tw.RecordDB() as db:
         print("Successfully corrected {} point entries ({:.2f} sec)".format(count, time.time() - starttime))
 
         # delete zero point entries
-        starttime = time.time()
         c.execute("DELETE FROM race_points WHERE Points = 0")
         count = c.rowcount
         c.execute("DELETE FROM race_catpoints WHERE Points = 0")
         count += c.rowcount
-        print("Successfully deleted {} zero point entries ({:.2f} sec)".format(count, time.time() - starttime))
+        print("Successfully deleted {} zero point entries".format(count))
 
         # delete non-long saves
         c.execute("DELETE t1 FROM race_saves t1 LEFT JOIN (SELECT Map FROM race_maps WHERE Server='Long') t2 ON t1.Map = t2.Map WHERE t2.Map IS NULL")
-        print("Successfully deleted {} non-long saves ({:.2f} sec)".format(c.rowcount, time.time() - starttime))
+        print("Successfully deleted {} non-long saves".format(c.rowcount))
+
+        # delete point entries of deleted players
+        starttime = time.time()
+        c.execute("DELETE t1 FROM race_points t1 LEFT JOIN race_race t2 ON t1.Name = t2.Name WHERE t2.Name IS NULL")
+        count = c.rowcount
+        c.execute("DELETE t1 FROM race_catpoints t1 LEFT JOIN (SELECT j1.Name, j2.Server FROM race_race j1 LEFT JOIN race_maps j2 ON j1.Map = j2.Map) t2 ON t1.Name = t2.Name AND t1.Server = t2.Server WHERE t2.Name IS NULL");
+        count += c.rowcount
+        print("Successfully deleted {} point entries of deleted players ({:.2f} sec)".format(count, time.time() - starttime))
+
+        # delete last record entries of deleted players
+        c.execute("DELETE t1 FROM race_lastrecords t1 LEFT JOIN race_race t2 ON t1.Map = t2.Map AND t1.Name = t2.Name WHERE t2.Name IS NULL")
+        print("Successfully deleted {} last record entries of deleted players".format(c.rowcount))
+
+        # delete rank cache entries of deleted players
+        c.execute("DELETE t1 FROM race_ranks t1 LEFT JOIN race_race t2 ON t1.Map = t2.Map AND t1.Name = t2.Name WHERE t2.Name IS NULL")
+        print("Successfully deleted {} rank cache entries of deleted players".format(c.rowcount))

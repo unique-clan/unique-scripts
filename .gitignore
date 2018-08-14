@@ -8,10 +8,8 @@
 server.pid
 server.log
 server.log.old
-/sql_backup
-/race_test/data/maps/
-/race_test/records/
-/acception/records/
+/sql/backups/
+/*/records/
 /passwords.json
 /local_config.json
 /bans.cfg.tmpl

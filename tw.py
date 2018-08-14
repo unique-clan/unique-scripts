@@ -10,6 +10,7 @@ import requests
 basedir = '/srv/tw'
 racedir = os.path.join(basedir, 'race')
 srcdir = os.path.join(basedir, 'src')
+sqldir = os.path.join(basedir, 'sql')
 
 with open(os.path.join(basedir, 'local_config.json')) as configfile:
     config = json.load(configfile)

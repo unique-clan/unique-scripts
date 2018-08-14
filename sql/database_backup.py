@@ -11,7 +11,7 @@ def backup(prefix, table_types):
     for table_type in table_types:
         tables += prefix+'_'+table_type+' '
     datestr = datetime.date.today().strftime('%Y-%m-%d')
-    path = os.path.join(tw.basedir, 'sql_backup', prefix+'_'+datestr+'.sql')
+    path = os.path.join(tw.sqldir, 'backups', prefix+'_'+datestr+'.sql')
     cmd = 'mysqldump records {} > {}'.format(tables, path)
     print("Creating backup of {} from {}".format(prefix, datestr))
     subprocess.run(cmd, shell=True)
