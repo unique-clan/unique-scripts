@@ -10,17 +10,20 @@ lengths = ['short', 'middle', 'long']
 
 with tw.RecordDB() as db:
     with db.query as c:
-        c.execute("SELECT Map, Server FROM race_maps")
+        c.execute("SELECT Map, Server, Stars FROM race_maps")
         votes = {}
         for row in c.fetchall():
             mapname = row[0]
             length = row[1].lower()
+            difficulty = row[2]
             if mapname in votes:
                 print("Error: Mapvote '{}' has duplicates".format(mapname))
             if length in lengths:
                 votes[mapname] = length
             else:
                 print("Error: Mapvote '{}' has an invalid map length field".format(mapname))
+            if (length == 'long' and not 0 <= difficulty <= 2) or (length != 'long' and difficulty != 0):
+                print("Error: Mapvote '{}' has an invalid difficulty field".format(mapname))
 
 conforgs = {}
 for length in lengths:
