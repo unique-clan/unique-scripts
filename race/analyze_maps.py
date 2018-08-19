@@ -50,6 +50,8 @@ for filename in os.listdir(folder):
             images.append(filename[:-4])
         else:
             print("Error: Map image '{}' is not a regular file".format(filename))
+    else:
+        print("Error: Unknown file '{}'".format(filename))
 
 mapcount = {l: 0 for l in lengths}
 for mapname, maplength in votes.items():
