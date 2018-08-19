@@ -31,6 +31,7 @@ for length in lengths:
 
 maps = []
 configs = {}
+images = []
 for filename in os.listdir(folder):
     filepath = os.path.join(folder, filename)
     if filename.endswith('.map'):
@@ -44,6 +45,11 @@ for filename in os.listdir(folder):
             configs[filename[:-8]] = conforgs[conforg]
         else:
             print("Error: Mapconfig '{}' is not a symlink to a length dependent reset file".format(filename))
+    elif filename.endswith('.png'):
+        if os.path.isfile(filepath):
+            images.append(filename[:-4])
+        else:
+            print("Error: Map image '{}' is not a regular file".format(filename))
 
 mapcount = {l: 0 for l in lengths}
 for mapname, maplength in votes.items():
@@ -54,11 +60,16 @@ for mapname, maplength in votes.items():
         print("Error: Mapvote '{}' has no corresponding mapconfig".format(mapname))
     elif maplength != configs[mapname]:
         print("Error: Map length field of mapvote '{}' does not match the corresponding mapconfigs symlink to the length dependent reset file".format(mapname))
+    if mapname not in images:
+        print("Error: Mapvote '{}' has no corresponding map image".format(mapname))
 for mapname in maps:
     if mapname not in votes:
         print("Error: Mapfile '{}.map' has no corresponding mapvote".format(mapname))
 for mapname in configs:
     if mapname not in votes:
         print("Error: Mapconfig '{}.map.cfg' has no corresponding mapvote".format(mapname))
+for mapname in images:
+    if mapname not in votes:
+        print("Error: Map image '{}.png' has no corresponding mapvote".format(mapname))
 
 print("There are {} mapvotes in total ({short} short, {middle} middle, {long} long)".format(sum(mapcount.values()), **mapcount))
