@@ -10,6 +10,7 @@ import tw
 
 parser = argparse.ArgumentParser()
 parser.add_argument('mapfile', help="path to the map file")
+parser.add_argument('imgfile', help="path to the map image file")
 parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard"])
 args = parser.parse_args()
 
@@ -33,6 +34,13 @@ if newmapname:
     args.mapname = newmapname
 if '|' in args.mapname:
     print("The mapname may not contain '|'")
+    sys.exit()
+
+if not os.path.isfile(args.imgfile):
+    print("The specified map image path is not a file")
+    sys.exit()
+if not args.imgfile.endswith('.png'):
+    print("The map image filename has to end on '.png'")
     sys.exit()
 
 mappers = []
@@ -62,9 +70,12 @@ os.rename(args.mapfile, dest)
 
 confdest = os.path.join(tw.racedir, 'maps', args.mapname+'.map.cfg')
 conforg = os.path.join(tw.racedir, 'reset_'+length.lower()+'.cfg')
-print("Creating config at {}".format(confdest))
+print("Creating config at {}".format(confdest.replace(' ', '\\ ')))
 os.symlink(conforg, confdest)
 
+imgdest = os.path.join(tw.racedir, 'maps', args.mapname+'.png')
+print("Moving map image to {}".format(imgdest.replace(' ', '\\ ')))
+os.rename(args.imgfile, imgdest)
 
 added_votes = False
 with tw.RecordDB() as db:
