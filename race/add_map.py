@@ -92,5 +92,5 @@ with tw.RecordDB() as db:
 
 if added_votes:
     subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
-    msg = "@everyone **{}** by **{}** released on *{}* !".format(tw.escape_discord(args.mapname), tw.escape_discord(args.mapperstr), args.category)
+    msg = "@everyone **{}** by **{}** released on *{}* !\nhttps://uniqueclan.net/map/{}".format(tw.escape_discord(args.mapname), tw.escape_discord(args.mapperstr), args.category, tw.encode_url(args.mapname))
     tw.send_discord(msg, tw.passwords['discord_main'])

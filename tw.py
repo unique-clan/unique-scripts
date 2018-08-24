@@ -1,5 +1,6 @@
 import os
 import json
+import urllib
 try:
     import MySQLdb
 except:
@@ -32,6 +33,9 @@ def escape_discord(text):
 
 def send_discord(msg, key):
     requests.post('https://discordapp.com/api/webhooks/'+key, data={'content': msg})
+
+def encode_url(t):
+    return urllib.parse.quote(t, safe='')
 
 
 class DBCursor:
