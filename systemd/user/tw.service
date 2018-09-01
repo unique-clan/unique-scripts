@@ -1,0 +1,11 @@
+[Unit]
+Description=Teeworlds servers
+
+[Service]
+Type=oneshot
+ExecStart=/srv/tw/restart.py
+ExecStop=/srv/tw/stop.py
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
