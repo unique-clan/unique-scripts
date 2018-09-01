@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+import sys
 import time
 import requests
 import signal
 
+sys.path.append('/srv/tw')
 import tw
 
 
