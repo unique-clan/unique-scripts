@@ -15,6 +15,10 @@ clone()
         --include /storage.cfg \
         --include /servers.json \
         --include /passwords.json \
+        --include /setup-iptables.sh \
+        --include /systemd \
+        --include /systemd/user \
+        --include /systemd/user/tw.service \
         --include /.profile \
         --include /bin_ \
         --include /bin_/* \
