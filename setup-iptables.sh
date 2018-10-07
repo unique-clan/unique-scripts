@@ -25,7 +25,9 @@ ipt -X
 ipt -N TWSERVERINFO
 ipt -A INPUT -p udp --dport 8303:8350 -m string --algo bm --from 34 --to 54 --hex-string '|FF FF FF FF|gie3' -j TWSERVERINFO
 ipt -A INPUT -p udp --dport 8303:8350 -m string --algo bm --from 34 --to 54 --hex-string '|FF FF FF FF|fstd' -j TWSERVERINFO
-ipt -A TWSERVERINFO -m limit --limit 100/s --limit-burst 10 -j ACCEPT
+ipt -A TWSERVERINFO \
+    -m hashlimit --hashlimit-upto 10/s --hashlimit-burst 60 --hashlimit-mode srcip --hashlimit-name twserverinfo \
+    -m limit --limit 100/s --limit-burst 60 -j ACCEPT
 ipt -A TWSERVERINFO -m limit --limit 1/m -j LOG --log-prefix "iptables drop TWSERVERINFO: "
 ipt -A TWSERVERINFO -j DROP
 
