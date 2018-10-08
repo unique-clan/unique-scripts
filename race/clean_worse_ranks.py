@@ -26,10 +26,6 @@ with tw.RecordDB() as db:
         count += c.rowcount
         print("Successfully deleted {} zero point entries".format(count))
 
-        # delete non-long saves
-        c.execute("DELETE t1 FROM race_saves t1 LEFT JOIN (SELECT Map FROM race_maps WHERE Server='Long') t2 ON t1.Map = t2.Map WHERE t2.Map IS NULL")
-        print("Successfully deleted {} non-long saves".format(c.rowcount))
-
         # delete point entries of deleted players
         starttime = time.time()
         c.execute("DELETE t1 FROM race_points t1 LEFT JOIN race_race t2 ON t1.Name = t2.Name WHERE t2.Name IS NULL")

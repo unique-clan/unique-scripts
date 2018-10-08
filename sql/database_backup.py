@@ -18,4 +18,4 @@ def backup(prefix, table_types):
 
 
 backup('gores', ['race', 'teamrace'])
-backup('race', ['lastrecords', 'maps', 'race', 'saves'])
+backup('race', ['lastrecords', 'maps', 'race'])
