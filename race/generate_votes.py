@@ -13,7 +13,7 @@ def writelines(maps, votefile, length):
 print("Generating votes")
 
 with tw.RecordDB() as db:
-    for length in ('Short', 'Middle', 'Long'):
+    for length in ('Short', 'Middle', 'Long', 'Fastcap'):
         with db.query as c:
             c.execute("SELECT Map, Mapper FROM race_maps WHERE Server = %s ORDER BY Map", (length, ))
             maps = c.fetchall()

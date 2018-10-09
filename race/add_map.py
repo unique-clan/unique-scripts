@@ -11,7 +11,7 @@ import tw
 parser = argparse.ArgumentParser()
 parser.add_argument('mapfile', help="path to the map file")
 parser.add_argument('imgfile', help="path to the map image file")
-parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard"])
+parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard", "Fastcap"])
 args = parser.parse_args()
 
 length = args.category.split()[0]
