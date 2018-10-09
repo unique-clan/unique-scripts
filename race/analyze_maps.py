@@ -1,8 +1,15 @@
 #!/usr/bin/python3
 import sys
 import os
+import argparse
 
 import tw
+from validate_map import validate_map
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-v', '--validate-maps', action='store_true', help="validate map files")
+args = parser.parse_args()
 
 
 folder = os.path.join(tw.racedir, 'maps')
@@ -73,5 +80,12 @@ for mapname in configs:
 for mapname in images:
     if mapname not in votes:
         print("Error: Map image '{}.png' has no corresponding mapvote".format(mapname))
+
+if args.validate_maps:
+    print("Checking map files ...")
+    for mapname in maps:
+        if mapname in votes:
+            mappath = os.path.join(tw.racedir, 'maps', mapname) + '.map'
+            validate_map(mappath, 'fastcap' if votes[mapname] == 'fastcap' else 'race', only_critical=True)
 
 print("There are {} mapvotes in total ({short} short, {middle} middle, {long} long)".format(sum(mapcount.values()), **mapcount))

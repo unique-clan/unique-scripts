@@ -6,12 +6,13 @@ import subprocess
 import MySQLdb
 
 import tw
+from validate_map import validate_map
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('mapfile', help="path to the map file")
 parser.add_argument('imgfile', help="path to the map image file")
-parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard", "Fastcap"])
+parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard"])
 args = parser.parse_args()
 
 length = args.category.split()[0]
@@ -28,6 +29,10 @@ args.mapname = os.path.basename(args.mapfile)
 if not args.mapname.endswith('.map'):
     print("The map filename has to end on '.map'")
     sys.exit()
+
+if not validate_map(args.mapname, 'fastcap' if args.category == "Fastcap" else 'race'):
+    sys.exit()
+
 args.mapname = args.mapname[:-4]
 newmapname = input("Mapname (default '{}'): ".format(args.mapname))
 if newmapname:

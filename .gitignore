@@ -1,7 +1,7 @@
 /.*
 !/.gitignore
 !/.profile
-/__pycache__/
+__pycache__/
 *.cfg
 !/race/maps/*.cfg
 !storage.cfg

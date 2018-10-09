@@ -38,3 +38,6 @@
 [submodule "src/bomb"]
 	path = src/bomb
 	url = git@github.com:unique-clan/bomb.git
+[submodule "race/tml"]
+	path = race/tml
+	url = git@github.com:timakro/tml.git
