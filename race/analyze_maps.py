@@ -13,7 +13,7 @@ args = parser.parse_args()
 
 
 folder = os.path.join(tw.racedir, 'maps')
-lengths = ['short', 'middle', 'long']
+lengths = ['short', 'middle', 'long', 'fastcap']
 
 with tw.RecordDB() as db:
     with db.query as c:
@@ -22,17 +22,18 @@ with tw.RecordDB() as db:
         for row in c.fetchall():
             mapname = row[0]
             length = row[1].lower()
-            difficulty = row[2]
+            stars = row[2]
             if mapname in votes:
                 print("Error: Mapvote '{}' has duplicates".format(mapname))
             if length in lengths:
-                votes[mapname] = length
+                votes[mapname] = (length, stars)
             else:
                 print("Error: Mapvote '{}' has an invalid map length field".format(mapname))
-            if (length == 'long' and not 0 <= difficulty <= 2) or (length != 'long' and difficulty != 0):
-                print("Error: Mapvote '{}' has an invalid difficulty field".format(mapname))
+            if ((length == 'long' and not 0 <= stars <= 2) or (length == 'fastcap' and not 0 <= stars <= 1)
+                    or (length != 'long' and length != 'fastcap' and stars != 0)):
+                print("Error: Mapvote '{}' has an invalid stars field".format(mapname))
 
-conforgs = {}
+conforgs = {os.path.join(tw.racedir, 'reset_fastcap_no_wpns.cfg'): 'fastcap'}
 for length in lengths:
     conforgs[os.path.join(tw.racedir, 'reset_'+length+'.cfg')] = length
 
@@ -61,7 +62,7 @@ for filename in os.listdir(folder):
         print("Error: Unknown file '{}'".format(filename))
 
 mapcount = {l: 0 for l in lengths}
-for mapname, maplength in votes.items():
+for mapname, (maplength, mapstars) in votes.items():
     mapcount[maplength] += 1
     if mapname not in maps:
         print("Error: Mapvote '{}' has no corresponding mapfile".format(mapname))
@@ -69,7 +70,7 @@ for mapname, maplength in votes.items():
         print("Error: Mapvote '{}' has no corresponding mapconfig".format(mapname))
     elif maplength != configs[mapname]:
         print("Error: Map length field of mapvote '{}' does not match the corresponding mapconfigs symlink to the length dependent reset file".format(mapname))
-    if mapname not in images:
+    if mapname not in images and not (maplength == 'fastcap' and mapstars == 1):
         print("Error: Mapvote '{}' has no corresponding map image".format(mapname))
 for mapname in maps:
     if mapname not in votes:
@@ -86,6 +87,6 @@ if args.validate_maps:
     for mapname in maps:
         if mapname in votes:
             mappath = os.path.join(tw.racedir, 'maps', mapname) + '.map'
-            validate_map(mappath, 'fastcap' if votes[mapname] == 'fastcap' else 'race', only_critical=True)
+            validate_map(mappath, 'fastcap' if votes[mapname][0] == 'fastcap' else 'race', only_critical=True)
 
-print("There are {} mapvotes in total ({short} short, {middle} middle, {long} long)".format(sum(mapcount.values()), **mapcount))
+print("There are {} mapvotes in total ({short} short, {middle} middle, {long} long, {fastcap} fastcap)".format(sum(mapcount.values()), **mapcount))

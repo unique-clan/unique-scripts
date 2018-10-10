@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import sys
 import os
+import shutil
 import argparse
 import subprocess
 import MySQLdb
@@ -9,10 +10,26 @@ import tw
 from validate_map import validate_map
 
 
+def copy_map(suffix=''):
+    dest = os.path.join(tw.racedir, 'maps', args.mapname+suffix+'.map')
+    print("Copying map to {}".format(dest.replace(' ', '\\ ')))
+    shutil.copyfile(args.mapfile, dest)
+
+def create_config(suffix=''):
+    confdest = os.path.join(tw.racedir, 'maps', args.mapname+suffix+'.map.cfg')
+    conforg = os.path.join(tw.racedir, 'reset_'+length.lower()+suffix+'.cfg')
+    print("Creating config at {}".format(confdest.replace(' ', '\\ ')))
+    os.symlink(conforg, confdest)
+
+def add_vote(c, suffix, stars):
+    c.execute("INSERT INTO race_maps (Map, Server, Mapper, Stars) VALUES (%s, %s, %s, %s)", (args.mapname+suffix, length, args.mapperstr, stars))
+    print("Added new vote {}".format(args.mapname+suffix))
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument('mapfile', help="path to the map file")
 parser.add_argument('imgfile', help="path to the map image file")
-parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard"])
+parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard", "Fastcap"])
 parser.add_argument('-f', '--force', action='store_true', help="respect only critical validation errors")
 parser.add_argument('--no-announce', action='store_true', help="don't send discord announcement message")
 args = parser.parse_args()
@@ -41,6 +58,9 @@ if newmapname:
     args.mapname = newmapname
 if '|' in args.mapname:
     print("The mapname may not contain '|'")
+    sys.exit()
+if args.mapname.endswith('_no_wpns'):
+    print("The mapname may not end on '_no_wpns'")
     sys.exit()
 
 if not os.path.isfile(args.imgfile):
@@ -71,14 +91,14 @@ while True:
 args.mapperstr = ', '.join(mappers[:-1]) + (' & ' if len(mappers) > 1 else '') + mappers[-1] if mappers else ''
 
 
-dest = os.path.join(tw.racedir, 'maps', args.mapname+'.map')
-print("Moving map to {}".format(dest.replace(' ', '\\ ')))
-os.rename(args.mapfile, dest)
+copy_map()
+if args.category == "Fastcap":
+    copy_map('_no_wpns')
+os.remove(args.mapfile)
 
-confdest = os.path.join(tw.racedir, 'maps', args.mapname+'.map.cfg')
-conforg = os.path.join(tw.racedir, 'reset_'+length.lower()+'.cfg')
-print("Creating config at {}".format(confdest.replace(' ', '\\ ')))
-os.symlink(conforg, confdest)
+create_config()
+if args.category == "Fastcap":
+    create_config('_no_wpns')
 
 imgdest = os.path.join(tw.racedir, 'maps', args.mapname+'.png')
 print("Moving map image to {}".format(imgdest.replace(' ', '\\ ')))
@@ -88,8 +108,9 @@ added_votes = False
 with tw.RecordDB() as db:
     try:
         with db.commit as c:
-            c.execute("INSERT INTO race_maps (Map, Server, Mapper, Stars) VALUES (%s, %s, %s, %s)", (args.mapname, length, args.mapperstr, difficulty))
-            print("Added new vote")
+            add_vote(c, '', difficulty)
+            if args.category == "Fastcap":
+                add_vote(c, '_no_wpns', 1)
             added_votes = True
     except MySQLdb.Error as e:
         if str(e).startswith('(1062,'):

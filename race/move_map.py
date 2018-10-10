@@ -21,9 +21,9 @@ elif args.category == "Long Hard":
 
 with tw.RecordDB() as db:
     with db.commit as c:
-        c.execute("UPDATE race_maps SET Server = %s, Stars = %s WHERE Map = %s", (length, difficulty, args.mapname))
+        c.execute("UPDATE race_maps SET Server = %s, Stars = %s WHERE Map = %s AND Server != 'Fastcap'", (length, difficulty, args.mapname))
         if not c.rowcount:
-            print("Map '{}' does not exist or is already on {}".format(args.mapname, args.category))
+            print("Map '{}' does not exist or is on Fastcap or is already on {}".format(args.mapname, args.category))
             sys.exit()
         print("Updated vote")
 
