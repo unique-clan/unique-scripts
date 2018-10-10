@@ -13,6 +13,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('mapfile', help="path to the map file")
 parser.add_argument('imgfile', help="path to the map image file")
 parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard"])
+parser.add_argument('-f', '--force', action='store_true', help="respect only critical validation errors")
+parser.add_argument('--no-announce', action='store_true', help="don't send discord announcement message")
 args = parser.parse_args()
 
 length = args.category.split()[0]
@@ -30,7 +32,7 @@ if not args.mapname.endswith('.map'):
     print("The map filename has to end on '.map'")
     sys.exit()
 
-if not validate_map(args.mapname, 'fastcap' if args.category == "Fastcap" else 'race'):
+if not validate_map(args.mapname, 'fastcap' if args.category == "Fastcap" else 'race', only_critical=args.force):
     sys.exit()
 
 args.mapname = args.mapname[:-4]
@@ -97,5 +99,6 @@ with tw.RecordDB() as db:
 
 if added_votes:
     subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
-    msg = "@everyone **{}** by **{}** released on *{}* !\nhttps://uniqueclan.net/map/{}".format(tw.escape_discord(args.mapname), tw.escape_discord(args.mapperstr), args.category, tw.encode_url(args.mapname))
-    tw.send_discord(msg, tw.passwords['discord_main'])
+    if not args.no_announce:
+        msg = "@everyone **{}** by **{}** released on *{}* !\nhttps://uniqueclan.net/map/{}".format(tw.escape_discord(args.mapname), tw.escape_discord(args.mapperstr), args.category, tw.encode_url(args.mapname))
+        tw.send_discord(msg, tw.passwords['discord_main'])

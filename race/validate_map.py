@@ -3,7 +3,7 @@ import sys
 sys.path.append('/srv/tw/race/tml')
 
 from tml.tml import Teemap
-from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX
+from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX, EXTERNAL_MAPRES
 
 
 # Exceptions:
@@ -11,7 +11,7 @@ from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX
 # - run_crossover uses weapon tele
 
 
-RACE_SETTINGS =  set([b'sv_delete_grenades_after_death 0', b'sv_infinite_ammo 1', \
+NOHARM_SETTINGS =  set([b'sv_delete_grenades_after_death 0', b'sv_infinite_ammo 1', \
     b'sv_pickup_respawn -1', b'sv_regen 0', b'sv_rocket_jump_damage 0', \
     b'sv_strip 0', b'sv_teleport 0', b'sv_teleport_grenade 0', b'sv_teleport_kill 0', \
     b'sv_teleport_vel_reset 0', b'sv_teleport 1', b'sv_no_items 0'])
@@ -30,7 +30,7 @@ def err(msg):
     global success
     if show_error:
         print("Error: {}: {}".format(mapname, msg))
-    success = False
+        success = False
 
 def crit(msg):
     global success
@@ -48,18 +48,21 @@ def validate_info(t):
     if not t.info:
         err("No info data (load and save in editor to fix)")
         return
-    if not t.info.settings:
+    if not t.info.settings or t.info.settings == [b'']:
         return
-    if gametype == 'race' and (t.info.settings == [b''] or t.info.settings == ['sv_health_and_ammo 1']):
-        return
-    if gametype == 'teerace' and set(t.info.settings) == set(['sv_fastcap 1', 'sv_health_and_ammo 1']):
+    if gametype == 'race' and t.info.settings == ['sv_health_and_ammo 1']:
         return
     if mapname == 'run_300_from_scratch' or mapname == 'run_300_from_hatch':
         return
-    if set(t.info.settings).issubset(RACE_SETTINGS):
+    if set(t.info.settings).issubset(NOHARM_SETTINGS):
         err("Invalid server settings")
     else:
         crit("Invalid server settings {}".format(set(t.info.settings) - RACE_SETTINGS))
+
+def validate_mapres(t):
+    for image in t.images:
+        if image.external and image.name not in EXTERNAL_MAPRES:
+            err("Mapre '{}' not embedded".format(image.name))
 
 def validate_layers(t):
     if t.switchlayer:
@@ -151,6 +154,7 @@ def validate_map(path, gtype, only_critical=False):
     t = load_map()
     if t:
         validate_info(t)
+        validate_mapres(t)
         validate_layers(t)
         validate_gametiles(t)
         validate_teletiles(t)
