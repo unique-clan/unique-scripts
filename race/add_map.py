@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import sys
 import os
-import shutil
 import argparse
 import subprocess
 import MySQLdb
@@ -9,11 +8,6 @@ import MySQLdb
 import tw
 from validate_map import validate_map
 
-
-def copy_map(suffix=''):
-    dest = os.path.join(tw.racedir, 'maps', args.mapname+suffix+'.map')
-    print("Copying map to {}".format(dest.replace(' ', '\\ ')))
-    shutil.copyfile(args.mapfile, dest)
 
 def create_config(suffix=''):
     confdest = os.path.join(tw.racedir, 'maps', args.mapname+suffix+'.map.cfg')
@@ -89,10 +83,13 @@ while True:
 mapper = ', '.join(mappers[:-1]) + (' & ' if len(mappers) > 1 else '') + mappers[-1] if mappers else None
 
 
-copy_map()
+dest = os.path.join(tw.racedir, 'maps', args.mapname+'.map')
+print("Moving map to {}".format(dest.replace(' ', '\\ ')))
+os.rename(args.mapfile, dest)
 if args.category == "Fastcap":
-    copy_map('_no_wpns')
-os.remove(args.mapfile)
+    dest_no_wpns = os.path.join(tw.racedir, 'maps', args.mapname+'_no_wpns.map')
+    print("Creating map symlink at {}".format(dest_no_wpns.replace(' ', '\\ ')))
+    os.symlink(dest, dest_no_wpns)
 
 create_config()
 if args.category == "Fastcap":
