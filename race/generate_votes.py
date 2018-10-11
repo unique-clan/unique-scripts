@@ -17,7 +17,10 @@ MAP_CATEGORIES = [
 
 def writelines(maps, votefile):
     for mapname, mapper in maps:
-        votefile.write('@chmap|'+mapname+'|'+mapper+'\n')
+        line = '@chmap|'+mapname
+        if mapper:
+            line += '|'+mapper
+        votefile.write(line+'\n')
 
 print("Generating votes")
 
