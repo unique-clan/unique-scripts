@@ -1,5 +1,8 @@
+#!/usr/bin/python3
 import os
 import sys
+import argparse
+
 sys.path.append('/srv/tw/race/tml')
 
 from tml.tml import Teemap
@@ -161,3 +164,12 @@ def validate_map(path, gtype, only_critical=False):
         validate_speeduptiles(t)
 
     return success
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('mapfile', help="path to the map file")
+    parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard", "Fastcap"])
+    args = parser.parse_args()
+
+    validate_map(args.mapfile, 'fastcap' if args.category == "Fastcap" else 'race')

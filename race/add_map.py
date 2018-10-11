@@ -49,7 +49,7 @@ if not args.mapname.endswith('.map'):
     print("The map filename has to end on '.map'")
     sys.exit()
 
-if not validate_map(args.mapname, 'fastcap' if args.category == "Fastcap" else 'race', only_critical=args.force):
+if not validate_map(args.mapfile, 'fastcap' if args.category == "Fastcap" else 'race', only_critical=args.force):
     sys.exit()
 
 args.mapname = args.mapname[:-4]
