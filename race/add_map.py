@@ -117,6 +117,8 @@ if added_votes:
     subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
     if not args.no_announce:
         msg =  "@everyone **{}** ".format(tw.escape_discord(args.mapname))
+        if args.category == "Fastcap":
+            msg += "and **{}** ".format(tw.escape_discord(args.mapname+'_no_wpns.map'))
         if mapper:
             msg += "by **{}** ".format(tw.escape_discord(mapper))
         msg += "released on *{}* !\nhttps://uniqueclan.net/map/{}".format(args.category, tw.encode_url(args.mapname))
