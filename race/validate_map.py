@@ -12,6 +12,7 @@ from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX, EXTERNAL_MAPRES
 # Exceptions:
 # - run_300_from_scratch and run_300_from_hatch use tunes
 # - run_crossover uses weapon tele
+# - ctf1-7 not checked, we can't change standard maps
 
 
 NOHARM_SETTINGS =  set([b'sv_delete_grenades_after_death 0', b'sv_infinite_ammo 1', \
@@ -27,6 +28,8 @@ NOHARM_TILES = [29, 30, 31, 68, 93, 94, 134, 176] + \
 
 TELE_TILES   = list(map(TELEINDEX.get, ['air', 'from', 'from_evil', 'to', 'cp', \
                'cp_from', 'cp_from_evil', 'cp_to']))
+
+STD_CTF_MAPS = ['ctf1', 'ctf2', 'ctf3', 'ctf4', 'ctf5', 'ctf6', 'ctf7']
 
 
 def err(msg):
@@ -157,7 +160,7 @@ def validate_map(path, gtype, only_critical=False):
     success = True
 
     t = load_map()
-    if t:
+    if t and mapname not in STD_CTF_MAPS:
         validate_info(t)
         validate_mapres(t)
         validate_layers(t)
