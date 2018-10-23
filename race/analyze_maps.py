@@ -84,8 +84,8 @@ for mapname in images:
 
 if args.validate_maps:
     print("Checking map files ...")
-    for mapname in maps:
-        if mapname in votes:
+    for mapname, (maplength, mapstars) in votes.items():
+        if mapname in maps and not (maplength == 'fastcap' and mapstars == 1):
             mappath = os.path.join(tw.racedir, 'maps', mapname) + '.map'
             validate_map(mappath, 'fastcap' if votes[mapname][0] == 'fastcap' else 'race', only_critical=True)
 
