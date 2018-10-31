@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import time
 
+sys.path.append('/srv/tw')
 import tw
 
 
