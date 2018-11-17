@@ -120,14 +120,13 @@ def validate_gametiles(t):
                     crit("Invalid index {} in {}".format(tile.index, layer_name))
                 warned.append(tile.index)
 
-    if gametype == 'race' and (spawn_count == 0 or spawn_red_count != 0 or spawn_blue_count != 0 \
-                               or flag_red_count != 0 or flag_blue_count != 0):
+    if ((gametype == 'race'    and (spawn_count == 0 or spawn_red_count != 0 or spawn_blue_count != 0 or
+                                    flag_red_count != 0 or flag_blue_count != 0)) or
+        (gametype == 'fastcap' and (spawn_count != 0 or spawn_red_count == 0 or spawn_blue_count == 0 or
+                                    flag_red_count != 1 or flag_blue_count != 1))):
         crit("Invalid spawn or flagstand count")
-    if gametype == 'race' and spawn_count > 1:
+    elif spawn_count > 1 or spawn_red_count > 1 or spawn_blue_count > 1:
         err("More than one spawns")
-    if gametype == 'fastcap' and (spawn_count != 0 or spawn_red_count != 1 or spawn_blue_count != 1 \
-                               or flag_red_count != 1 or flag_blue_count != 1):
-        crit("Invalid spawn or flagstand count")
 
 def validate_teletiles(t):
     if not t.telelayer:
