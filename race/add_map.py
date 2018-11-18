@@ -24,8 +24,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('mapfile', help="path to the map file")
 parser.add_argument('imgfile', help="path to the map image file")
 parser.add_argument('category', choices=["Short", "Middle", "Long Easy", "Long Advanced", "Long Hard", "Fastcap"])
+parser.add_argument('mapper', nargs='*', help="mapper name (no mappers are valid)")
 parser.add_argument('-f', '--force', action='store_true', help="respect only critical validation errors")
 parser.add_argument('--no-announce', action='store_true', help="don't send discord announcement message")
+parser.add_argument('--dry-run', action='store_true', help="validate the release without actually performing it")
 args = parser.parse_args()
 
 length = args.category.split()[0]
@@ -47,9 +49,6 @@ if not validate_map(args.mapfile, 'fastcap' if args.category == "Fastcap" else '
     sys.exit()
 
 args.mapname = args.mapname[:-4]
-newmapname = input("Mapname (default '{}'): ".format(args.mapname))
-if newmapname:
-    args.mapname = newmapname
 if '|' in args.mapname:
     print("The mapname may not contain '|'")
     sys.exit()
@@ -64,23 +63,25 @@ if not args.imgfile.endswith('.png'):
     print("The map image filename has to end on '.png'")
     sys.exit()
 
-mappers = []
-n = 1
-while True:
-    mapper = input("Mapper {} (empty if not present): ".format(n))
+for mapper in args.mapper:
+    if '|' in mapper:
+        print("Mapper names may not contain '|'")
+    elif ', ' in mapper:
+        print("Mapper names may not contain ', '")
+    elif ' & ' in mapper:
+        print("Mapper names may not contain ' & '")
+mapper = ', '.join(args.mapper[:-1]) + (' & ' if len(args.mapper) > 1 else '') + args.mapper[-1] if args.mapper else None
+
+if args.dry_run:
+    print("The following map would be released without --dry-run")
+    msg = "'{}' ".format(args.mapname)
+    if args.category == "Fastcap":
+        msg += "and '{}' ".format(args.mapname+'_no_wpns')
     if mapper:
-        if '|' in mapper:
-            print("The mapper name may not contain '|'")
-        elif ', ' in mapper:
-            print("The mapper name may not contain ', '")
-        elif ' & ' in mapper:
-            print("The mapper name may not contain ' & '")
-        else:
-            mappers.append(mapper)
-            n += 1
-    else:
-        break
-mapper = ', '.join(mappers[:-1]) + (' & ' if len(mappers) > 1 else '') + mappers[-1] if mappers else None
+        msg += "by '{}' ".format(mapper)
+    msg += "on {}".format(args.category)
+    print(msg)
+    sys.exit()
 
 
 dest = os.path.join(tw.racedir, 'maps', args.mapname+'.map')
@@ -116,9 +117,9 @@ with tw.RecordDB() as db:
 if added_votes:
     subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
     if not args.no_announce:
-        msg =  "@everyone **{}** ".format(tw.escape_discord(args.mapname))
+        msg = "@everyone **{}** ".format(tw.escape_discord(args.mapname))
         if args.category == "Fastcap":
-            msg += "and **{}** ".format(tw.escape_discord(args.mapname+'_no_wpns.map'))
+            msg += "and **{}** ".format(tw.escape_discord(args.mapname+'_no_wpns'))
         if mapper:
             msg += "by **{}** ".format(tw.escape_discord(mapper))
         msg += "released on *{}* !\nhttps://uniqueclan.net/map/{}".format(args.category, tw.encode_url(args.mapname))

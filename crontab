@@ -1,4 +1,6 @@
 PATH=/srv/tw/bin_:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+PYTHONPATH=/srv/tw
 
-# clean up worse ranks every night
-24 3    * * *   racecleanranks > /dev/null
+# m h dom mon dow command
+24 3    *  *  * racecleanranks > /dev/null
+0  17   18 11 * raceaddmap ctf_medieval.map ctf_medieval.png Fastcap chi1 Lord -f > /dev/null
