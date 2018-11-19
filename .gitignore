@@ -13,3 +13,4 @@ server.log.old
 /passwords.json
 /local_config.json
 /bans.cfg.tmpl
+/race/release/

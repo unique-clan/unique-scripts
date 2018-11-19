@@ -47,7 +47,7 @@ def load_map():
     try:
         t = Teemap(mappath)
         return t
-    except ValueError as err:
+    except Exception as err:
         crit(err)
 
 def validate_info(t):
