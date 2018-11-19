@@ -26,7 +26,8 @@ else:
     sys.exit()
 
 serverdir = os.path.join(tw.basedir, server)
-logpath = os.path.join(serverdir, 'server.log')
+#logpath = os.path.join(serverdir, 'server.log')
+logpath = '/dev/null'
 portpath = os.path.join(serverdir, 'port.cfg')
 
 signal.signal(signal.SIGINT, stop)
