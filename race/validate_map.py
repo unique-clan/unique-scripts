@@ -23,13 +23,12 @@ NOHARM_SETTINGS =  set([b'sv_delete_grenades_after_death 0', b'sv_infinite_ammo 
 FRONT_TILES  = list(map(TILEINDEX.get, ['air', 'death', 'start', 'finish', 'armor', \
               'health', 'grenade', 'stopper', 'stopper_twoway', 'stopper_allway']))
 GAME_TILES   = list(map(TILEINDEX.get, ['solid', 'nohook']))
+CTF_TILES    = list(map(TILEINDEX.get, ['shotgun', 'ninja', 'rifle']))
 NOHARM_TILES = [29, 30, 31, 68, 93, 94, 134, 176] + \
                list(map(TILEINDEX.get, ['shotgun', 'ninja', 'rifle']))
 
 TELE_TILES   = list(map(TELEINDEX.get, ['air', 'from', 'from_evil', 'to', 'cp', \
                'cp_from', 'cp_from_evil', 'cp_to']))
-
-STD_CTF_MAPS = ['ctf1', 'ctf2', 'ctf3', 'ctf4', 'ctf5', 'ctf6', 'ctf7']
 
 
 def err(msg):
@@ -92,6 +91,8 @@ def validate_gametiles(t):
             if tile.index in FRONT_TILES:
                 continue
             if layer.is_gamelayer and tile.index in GAME_TILES:
+                continue
+            if gametype == 'fastcap' and tile.index in CTF_TILES:
                 continue
             if TILEINDEX['cp_first'] <= tile.index <= TILEINDEX['cp_last']:
                 continue
@@ -160,7 +161,7 @@ def validate_map(path, gtype, only_critical=False):
     success = True
 
     t = load_map()
-    if t and mapname not in STD_CTF_MAPS:
+    if t:
         validate_info(t)
         validate_mapres(t)
         validate_layers(t)
