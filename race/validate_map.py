@@ -15,10 +15,11 @@ from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX, EXTERNAL_MAPRES
 # - ctf1-7 not checked, we can't change standard maps
 
 
-NOHARM_SETTINGS =  set([b'sv_delete_grenades_after_death 0', b'sv_infinite_ammo 1', \
-    b'sv_pickup_respawn -1', b'sv_regen 0', b'sv_rocket_jump_damage 0', \
-    b'sv_strip 0', b'sv_teleport 0', b'sv_teleport_grenade 0', b'sv_teleport_kill 0', \
-    b'sv_teleport_vel_reset 0', b'sv_teleport 1', b'sv_no_items 0'])
+RACE_SETTINGS   = set(['sv_health_and_ammo 1', 'sv_kill_grenades 1'])
+NOHARM_SETTINGS = set(['sv_delete_grenades_after_death 0', 'sv_infinite_ammo 1', \
+    'sv_pickup_respawn -1', 'sv_regen 0', 'sv_rocket_jump_damage 0', \
+    'sv_strip 0', 'sv_teleport 0', 'sv_teleport_grenade 0', 'sv_teleport_kill 0', \
+    'sv_teleport_vel_reset 0', 'sv_teleport 1', 'sv_no_items 0'])
 
 FRONT_TILES  = list(map(TILEINDEX.get, ['air', 'death', 'start', 'finish', 'armor', \
               'health', 'grenade', 'stopper', 'stopper_twoway', 'stopper_allway']))
@@ -53,16 +54,17 @@ def validate_info(t):
     if not t.info:
         err("No info data (load and save in editor to fix)")
         return
-    if not t.info.settings or t.info.settings == [b'']:
-        return
-    if gametype == 'race' and t.info.settings == [b'sv_health_and_ammo 1']:
+    settings = set([s.decode() for s in t.info.settings])
+    if not settings or settings == set(['']):
         return
     if mapname == 'run_300_from_scratch' or mapname == 'run_300_from_hatch':
         return
-    if set(t.info.settings).issubset(NOHARM_SETTINGS):
+    if gametype == 'race' and settings.issubset(RACE_SETTINGS):
+        return
+    if settings.issubset(NOHARM_SETTINGS):
         err("Invalid server settings")
     else:
-        crit("Invalid server settings {}".format(set(t.info.settings) - NOHARM_SETTINGS))
+        crit("Invalid server settings {}".format(settings - NOHARM_SETTINGS))
 
 def validate_mapres(t):
     for image in t.images:
