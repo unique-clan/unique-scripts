@@ -55,14 +55,14 @@ def validate_info(t):
         return
     if not t.info.settings or t.info.settings == [b'']:
         return
-    if gametype == 'race' and t.info.settings == ['sv_health_and_ammo 1']:
+    if gametype == 'race' and t.info.settings == [b'sv_health_and_ammo 1']:
         return
     if mapname == 'run_300_from_scratch' or mapname == 'run_300_from_hatch':
         return
     if set(t.info.settings).issubset(NOHARM_SETTINGS):
         err("Invalid server settings")
     else:
-        crit("Invalid server settings {}".format(set(t.info.settings) - RACE_SETTINGS))
+        crit("Invalid server settings {}".format(set(t.info.settings) - NOHARM_SETTINGS))
 
 def validate_mapres(t):
     for image in t.images:
