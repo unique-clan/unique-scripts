@@ -14,3 +14,4 @@ server.log.old
 /local_config.json
 /bans.cfg.tmpl
 /race/release/
+/race_test/data/maps/
