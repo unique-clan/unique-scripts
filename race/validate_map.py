@@ -21,12 +21,11 @@ NOHARM_SETTINGS = set(['sv_delete_grenades_after_death 0', 'sv_infinite_ammo 1',
     'sv_strip 0', 'sv_teleport 0', 'sv_teleport_grenade 0', 'sv_teleport_kill 0', \
     'sv_teleport_vel_reset 0', 'sv_teleport 1', 'sv_no_items 0'])
 
-FRONT_TILES  = list(map(TILEINDEX.get, ['air', 'death', 'start', 'finish', 'armor', \
-              'health', 'grenade', 'stopper', 'stopper_twoway', 'stopper_allway']))
+FRONT_TILES  = list(map(TILEINDEX.get, ['air', 'death', 'start', 'finish', \
+              'armor', 'health', 'shotgun', 'grenade', 'ninja', 'rifle', \
+              'stopper', 'stopper_twoway', 'stopper_allway']))
 GAME_TILES   = list(map(TILEINDEX.get, ['solid', 'nohook']))
-CTF_TILES    = list(map(TILEINDEX.get, ['shotgun', 'ninja', 'rifle']))
-NOHARM_TILES = [29, 30, 31, 68, 93, 94, 134, 176] + \
-               list(map(TILEINDEX.get, ['shotgun', 'ninja', 'rifle']))
+NOHARM_TILES = [29, 30, 31, 68, 93, 94, 134, 176]
 
 TELE_TILES   = list(map(TELEINDEX.get, ['air', 'from', 'from_evil', 'to', 'cp', \
                'cp_from', 'cp_from_evil', 'cp_to']))
@@ -50,9 +49,8 @@ def load_map():
     except Exception as err:
         crit(err)
 
-def validate_info(t):
-    if not t.info:
-        err("No info data (load and save in editor to fix)")
+def validate_settings(t):
+    if not t.info or not t.info.settings:
         return
     settings = set([s.decode() for s in t.info.settings])
     if not settings or settings == set(['']):
@@ -93,8 +91,6 @@ def validate_gametiles(t):
             if tile.index in FRONT_TILES:
                 continue
             if layer.is_gamelayer and tile.index in GAME_TILES:
-                continue
-            if gametype == 'fastcap' and tile.index in CTF_TILES:
                 continue
             if TILEINDEX['cp_first'] <= tile.index <= TILEINDEX['cp_last']:
                 continue
@@ -164,7 +160,7 @@ def validate_map(path, gtype, only_critical=False):
 
     t = load_map()
     if t:
-        validate_info(t)
+        validate_settings(t)
         validate_mapres(t)
         validate_layers(t)
         validate_gametiles(t)
