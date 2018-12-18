@@ -7,9 +7,9 @@ import tw
 with tw.RecordDB() as db:
     with db.commit as c:
         # delete worse ranks
-        starttime = time.time()
-        c.execute("DELETE t1 FROM race_race t1 LEFT JOIN (SELECT Map, Name, MIN(Time) AS minTime FROM race_race GROUP BY Map, Name) t2 ON t1.Map = t2.Map AND t1.Name = t2.Name AND t1.Time = t2.minTime WHERE t2.Map IS NULL")
-        print("Successfully deleted {} worse ranks ({:.2f} sec)".format(c.rowcount, time.time() - starttime))
+#        starttime = time.time()
+#        c.execute("DELETE t1 FROM race_race t1 LEFT JOIN (SELECT Map, Name, MIN(Time) AS minTime FROM race_race GROUP BY Map, Name) t2 ON t1.Map = t2.Map AND t1.Name = t2.Name AND t1.Time = t2.minTime WHERE t2.Map IS NULL")
+#        print("Successfully deleted {} worse ranks ({:.2f} sec)".format(c.rowcount, time.time() - starttime))
 
         # correct point entries
         starttime = time.time()
