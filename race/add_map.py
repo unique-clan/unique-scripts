@@ -95,10 +95,10 @@ with tw.RecordDB() as db:
 
 subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
 if not args.no_announce:
-    msg = "@everyone **{}** ".format(tw.escape_discord(args.mapname))
+    msg = "@everyone [{}](https://uniqueclan.net/map/{}) ".format(tw.escape_discord(args.mapname), tw.encode_url(args.mapname))
     if args.category == "Fastcap":
         msg += "and **{}** ".format(tw.escape_discord(args.mapname+'_no_wpns'))
     if mapper:
-        msg += "by **{}** ".format(tw.escape_discord(mapper))
-    msg += "released on *{}* !\nhttps://uniqueclan.net/map/{}".format(args.category, tw.encode_url(args.mapname))
+        msg += "by [{}](https://uniqueclan.net/mapper/{}) ".format(tw.escape_discord(mapper), tw.encode_url(mapper))
+    msg += "released on *{}*!".format(args.category)
     tw.send_discord(msg, tw.passwords['discord_main'])

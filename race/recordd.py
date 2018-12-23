@@ -29,5 +29,5 @@ with tw.RecordDB() as db:
             for row in c.fetchall():
                 currentid = row[0]
                 c.execute("INSERT INTO race_lastrecords (Map, Name, Timestamp, Time) VALUES (%s, %s, %s, %s)", row[1:])
-                msg = '**{}** took the first rank on **{}** with __{:02}:{:06.3f}__ !'.format(tw.escape_discord(row[2]), tw.escape_discord(row[1]), int(row[4] // 60), row[4] % 60)
+                msg = '[{}](https://uniqueclan.net/ranks/player/{}) took the first rank on [{}](https://uniqueclan.net/map/{}) with __{:02}:{:06.3f}__ !'.format(tw.escape_discord(row[2]), tw.encode_url(row[2]), tw.escape_discord(row[1]), tw.encode_url(row[1]), int(row[4] // 60), row[4] % 60)
                 tw.send_discord(msg, tw.passwords['discord_records'])
