@@ -100,5 +100,5 @@ if not args.no_announce:
         msg += "and **{}** ".format(tw.escape_discord(args.mapname+'_no_wpns'))
     if mapper:
         msg += "by [{}](https://uniqueclan.net/mapper/{}) ".format(tw.escape_discord(mapper), tw.encode_url(mapper))
-    msg += "released on *{}*!".format(args.category)
+    msg += "released on *{}* !".format(args.category)
     tw.send_discord(msg, tw.passwords['discord_main'])
