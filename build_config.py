@@ -81,6 +81,12 @@ class Config:
     def chmap(self, mapname, *mappers):
         self.option(os.path.basename(mapname) + (' by ' + ', '.join(mappers[:-1]) + (' & ' if len(mappers) > 1 else '') + mappers[-1] if mappers else ''), 'change_map ' + mapname)
 
+    def findmaps(self, mapdir, mappath):
+        if not os.path.isdir(mapdir):
+            return
+        for filename in sorted(os.listdir(mapdir)):
+            self.chmap(os.path.join(mappath, filename[:-4]))
+
     def sqlserver(self, prefix, create_tables='0'):
         for use in ('r', 'w'):
             self._command('add_sqlserver', use, tw.config['sql']['database'], prefix, tw.config['sql']['user'], tw.config['sql']['password'], tw.config['sql']['ip'], tw.config['sql']['port'], create_tables)
