@@ -27,7 +27,7 @@
     },
     {
         "name": "CAN",
-        "ip": "54.39.23.96",
+        "ip": "54.39.96.248",
         "servers":
         [
             { "port": 8303, "dir": "race1",     "name": "Unique Race #1" },
