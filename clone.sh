@@ -45,17 +45,6 @@ clone()
         --include /footcfg/*.cfg.tmpl \
         --include /footcfg/maps \
         --include /footcfg/maps/* \
-        --include /src \
-        --include /src/mods.json \
-        --include /src/unique-race \
-        --include /src/unique-race/build \
-        --include /src/unique-race/build/DDNet-Server \
-        --include /src/fly \
-        --include /src/fly/teeworlds_srv \
-        --include /src/teesmash \
-        --include /src/teesmash/teeworlds_srv \
-        --include /src/football \
-        --include /src/football/teeworlds_srv \
         --exclude '*' \
         /srv/tw/ tw@$1:/srv/tw
 

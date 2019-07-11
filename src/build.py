@@ -13,9 +13,14 @@ for mod in mods:
     status = None
 
     if tool == 'bam':
-        status = subprocess.run(['bam', 'server_release']).returncode
+        status = subprocess.run(['../bam/bam', 'server_release']).returncode
     elif tool == 'cmake':
-        os.chdir('build')
+        try:
+            os.chdir('build')
+        except FileNotFoundError:
+            os.mkdir('build')
+            os.chdir('build')
+            subprocess.run(['cmake', '-DCLIENT=OFF', '-DMYSQL=ON', '..'])
         status = subprocess.run(['make', 'DDNet-Server']).returncode
 
     if status == 0:
