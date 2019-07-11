@@ -20,8 +20,10 @@ clone()
         --include /systemd/user \
         --include /systemd/user/tw.service \
         --include /.profile \
-        --include /bin_ \
-        --include /bin_/* \
+        --include /bin \
+        --include /bin/twbuildconf \
+        --include /bin/twrestart \
+        --include /bin/twstop \
         --include /stdmaps \
         --include /stdmaps/*.cfg.tmpl \
         --include /stdmaps/maps \
