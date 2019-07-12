@@ -16,3 +16,4 @@ server.log.old
 /bans.cfg.tmpl
 /race/release/
 /race_test/data/maps/
+*.swp
