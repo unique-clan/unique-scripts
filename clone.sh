@@ -45,6 +45,9 @@ clone()
         --include /footcfg/*.cfg.tmpl \
         --include /footcfg/maps \
         --include /footcfg/maps/* \
+        --include /src \
+        --include /src/build.py \
+        --include /src/mods.json \
         --exclude '*' \
         /srv/tw/ tw@$1:/srv/tw
 

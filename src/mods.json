@@ -1,13 +1,22 @@
 {
-    "bomb": "bam",
-    "ddnet": "cmake",
-    "fly": "bam",
-    "fng": "bam",
-    "football": "bam",
-    "freeze": "bam",
-    "instagib": "bam",
-    "monster": "bam",
-    "teesmash": "bam",
-    "unique-race": "cmake",
-    "teeworlds": "bam"
+    "bomb": { "git": "git@github.com:unique-clan/bomb.git" },
+    "fly": { "git": "git@github.com:unique-clan/fly.git" },
+    "fng": { "git": "git@github.com:unique-clan/fng.git" },
+    "football": { "git": "git@github.com:unique-clan/football.git" },
+    "freeze": { "git": "git@github.com:timakro/teeworlds-freeze.git" },
+    "instagib": { "git": "git@github.com:unique-clan/instagib.git" },
+    "monster": { "git": "git@github.com:unique-clan/monster.git" },
+    "teesmash": { "git": "git@github.com:timazuki/TeeSmash.git" },
+    "teeworlds": { "git": "git@github.com:unique-clan/teeworlds.git" },
+    "ddnet": {
+        "git": "git@github.com:ddnet/ddnet.git",
+        "ref": "12.5",
+        "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
+        "make": ["DDNet-Server"]
+    },
+    "unique-race": {
+        "git": "git@github.com:unique-clan/unique-race.git",
+        "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
+        "make": ["DDNet-Server"]
+    }
 }
