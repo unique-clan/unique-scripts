@@ -151,12 +151,15 @@ def handle_template(path):
                 args = parts[1:]
                 if not name.startswith('_') and hasattr(cfg, name):
                     function = getattr(cfg, name)
-                    argspec = inspect.getargspec(function)
-                    varargs = argspec[1] != None
-                    argnum = len(argspec[0]) - 1
-                    defaultnum = len(argspec[3]) if argspec[3] else 0
-                    minnum = argnum - defaultnum - (1 if varargs else 0)
-                    maxnum = argnum + (float('inf') if varargs else 0)
+                    minnum = 0
+                    maxnum = 0
+                    for para in inspect.signature(function).parameters.values():
+                        if para.kind == inspect.Parameter.POSITIONAL_OR_KEYWORD:
+                            if para.default == inspect.Parameter.empty:
+                                minnum += 1
+                            maxnum += 1
+                        elif para.kind == inspect.Parameter.VAR_POSITIONAL:
+                            maxnum = float('inf')
                     if minnum <= len(args) <= maxnum:
                         function(*args)
                     else:
