@@ -8,7 +8,8 @@ __pycache__/
 server.pid
 server.log
 server.log.old
-/sql/backups/
+/sql/backups/*
+!/sql/backups/.keep
 /*/records/
 /passwords.json
 /local_config.json
