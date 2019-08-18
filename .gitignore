@@ -2,6 +2,7 @@
 /.*
 !/.gitignore
 !/.profile
+!/.zprofile
 __pycache__/
 *.cfg
 !/race/maps/*.cfg
