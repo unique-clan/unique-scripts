@@ -27,8 +27,10 @@ with open(os.path.join(basedir, 'passwords.json')) as pwsfile:
 
 
 def escape_discord(text):
+    text = text.replace('\\', '\\\\')
     for c in '*_~`':
-        text = text.replace(c, '\\'+c)
+        if any(s.endswith(c) and c in s[:-1] for s in text.split()):
+            text = text.replace(c, '\\'+c)
     return text
 
 def send_discord(msg, key):
