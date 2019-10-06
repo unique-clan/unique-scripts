@@ -101,5 +101,5 @@ if not args.no_announce:
     if mapper:
         mapperlinks = ["[{}](https://uniqueclan.net/mapper/{})".format(tw.escape_discord(m), tw.encode_url(m)) for m in args.mapper]
         msg += "by " + ", ".join(mapperlinks[:-1]) + (" & " if len(mapperlinks) > 1 else "") + mapperlinks[-1] + " "
-    msg += "released on *{}* !".format(args.category)
+    msg += "released on *{}*!".format(args.category)
     tw.send_discord(msg, tw.passwords['discord_main'])
