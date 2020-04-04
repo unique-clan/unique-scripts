@@ -13,6 +13,7 @@ args = parser.parse_args()
 
 
 folder = os.path.join(tw.racedir, 'maps')
+folder07 = os.path.join(tw.racedir, 'maps07')
 lengths = ['short', 'middle', 'long', 'fastcap']
 
 with tw.RecordDB() as db:
@@ -59,13 +60,26 @@ for filename in os.listdir(folder):
         else:
             print("Error: Map image '{}' is not a regular file".format(filename))
     else:
-        print("Error: Unknown file '{}'".format(filename))
+        print("Error: Unknown file '{}' in maps folder".format(filename))
+
+maps07 = []
+for filename in os.listdir(folder07):
+    filepath = os.path.join(folder07, filename)
+    if filename.endswith('.map'):
+        if os.path.isfile(filepath):
+            maps07.append(filename[:-4])
+        else:
+            print("Error: 0.7 mapfile '{}' is not a regular file".format(filename))
+    else:
+        print("Error: Unknown file '{}' in 0.7 maps folder".format(filename))
 
 mapcount = {l: 0 for l in lengths}
 for mapname, (maplength, mapstars) in votes.items():
     mapcount[maplength] += 1
     if mapname not in maps:
         print("Error: Mapvote '{}' has no corresponding mapfile".format(mapname))
+    if mapname not in maps07:
+        print("Error: Mapvote '{}' has no corresponding 0.7 mapfile".format(mapname))
     if mapname not in configs:
         print("Error: Mapvote '{}' has no corresponding mapconfig".format(mapname))
     elif maplength != configs[mapname]:
@@ -75,6 +89,9 @@ for mapname, (maplength, mapstars) in votes.items():
 for mapname in maps:
     if mapname not in votes:
         print("Error: Mapfile '{}.map' has no corresponding mapvote".format(mapname))
+for mapname in maps07:
+    if mapname not in votes:
+        print("Error: 0.7 mapfile '{}.map' has no corresponding mapvote".format(mapname))
 for mapname in configs:
     if mapname not in votes:
         print("Error: Mapconfig '{}.map.cfg' has no corresponding mapvote".format(mapname))

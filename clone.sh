@@ -33,6 +33,8 @@ clone()
         --include /race/announcements.txt \
         --include /race/maps \
         --include /race/maps/* \
+        --include /race/maps07 \
+        --include /race/maps07/* \
         --include /flycfg \
         --include /flycfg/*.cfg.tmpl \
         --include /flycfg/maps \

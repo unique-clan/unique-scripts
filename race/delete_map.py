@@ -19,6 +19,13 @@ if os.path.isfile(dest):
 else:
     print("Map was not deleted, it couldn't be found at {}".format(dest.replace(' ', '\\ ')))
 
+dest07 = os.path.join(tw.racedir, 'maps07', mapname+'.map')
+if os.path.isfile(dest07):
+    print("Deleting map at {}".format(dest07.replace(' ', '\\ ')))
+    os.remove(dest07)
+else:
+    print("Map was not deleted, it couldn't be found at {}".format(dest07.replace(' ', '\\ ')))
+
 confdest = os.path.join(tw.racedir, 'maps', mapname+'.map.cfg')
 if os.path.isfile(confdest):
     print("Deleting config at {}".format(confdest))

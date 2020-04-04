@@ -75,10 +75,15 @@ if args.dry_run:
 
 
 dest = os.path.join(tw.racedir, 'maps', args.mapname+'.map')
+dest07 = os.path.join(tw.racedir, 'maps07', args.mapname+'.map')
+ddnet_build_dir = os.path.join(tw.srcdir, 'ddnet', 'build')
 os.rename(mappath, dest)
+subprocess.run([os.path.join(ddnet_build_dir, 'map_convert_07'), dest, dest07], cwd=ddnet_build_dir, stdout=subprocess.DEVNULL)
 if args.category == "Fastcap":
     dest_no_wpns = os.path.join(tw.racedir, 'maps', args.mapname+'_no_wpns.map')
+    dest_no_wpns07 = os.path.join(tw.racedir, 'maps07', args.mapname+'_no_wpns.map')
     os.symlink(dest, dest_no_wpns)
+    os.symlink(dest07, dest_no_wpns07)
 
 create_config()
 if args.category == "Fastcap":
