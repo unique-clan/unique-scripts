@@ -28,10 +28,17 @@ else:
 
 confdest = os.path.join(tw.racedir, 'maps', mapname+'.map.cfg')
 if os.path.isfile(confdest):
-    print("Deleting config at {}".format(confdest))
+    print("Deleting config at {}".format(confdest.replace(' ', '\\ ')))
     os.remove(confdest)
 else:
     print("Config was not deleted, it couldn't be found at {}".format(confdest.replace(' ', '\\ ')))
+
+imgdest = os.path.join(tw.racedir, 'maps', mapname+'.png')
+if os.path.isfile(imgdest):
+    print("Deleting image at {}".format(imgdest.replace(' ', '\\ ')))
+    os.remove(imgdest)
+else:
+    print("Image was not deleted, it couldn't be found at {}".format(imgdest.replace(' ', '\\ ')))
 
 deleted_votes = False
 with tw.RecordDB() as db:

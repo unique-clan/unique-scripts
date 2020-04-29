@@ -8,3 +8,4 @@ PYTHONPATH=/srv/tw
 
 # Map releases
 #0  14   18 11 * raceaddmap ctf_medieval Fastcap chi1 Lord
+#20 19   *  *  * raceaddmap fly4popo Middle SkizZ

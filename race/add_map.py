@@ -3,7 +3,6 @@ import sys
 import os
 import argparse
 import subprocess
-import MySQLdb
 
 import tw
 from validate_map import validate_map
@@ -99,6 +98,7 @@ with tw.RecordDB() as db:
             add_vote(c, '_no_wpns', 1)
 
 subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
+subprocess.run(os.path.join(tw.basedir, 'clone.sh'))
 if not args.no_announce:
     msg = "@everyone [{}](https://uniqueclan.net/map/{}) ".format(tw.escape_discord(args.mapname), tw.encode_url(args.mapname))
     if args.category == "Fastcap":
