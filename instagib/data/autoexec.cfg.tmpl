@@ -1,10 +1,17 @@
-@name|Instagib
-sv_map "instamaps/ctf5"
+@name|Instagib [iCTF/gCTF]
+sv_map "instamaps/ctf4_old"
 sv_gametype "ictf"
 
 exec teeworlds.cfg
 
 sv_scorelimit 1000
+sv_tournament_mode 0
+
+@heading|Game
+@option|restart round|restart
+@option|reload & fix wallshots|reload
+@option|iCTF|sv_gametype ictf; reload
+@option|gCTF|sv_gametype gctf; reload
 
 @heading|Timelimit
 @option|no timelimit|sv_timelimit 0
@@ -17,11 +24,13 @@ sv_scorelimit 1000
 
 @heading|Scorelimit
 @option|no scorelimit|sv_scorelimit 0
-@option|250 points|sv_scorelimit 250
+@option|20 points|sv_scorelimit 20
+@option|50 points|sv_scorelimit 50
+@option|100 points|sv_scorelimit 100
+@option|200 points|sv_scorelimit 200
+@option|400 points|sv_scorelimit 400
 @option|500 points|sv_scorelimit 500
 @option|1000 points|sv_scorelimit 1000
-@option|1500 points|sv_scorelimit 1500
-@option|2500 points|sv_scorelimit 2500
 
 @heading|Maps
 exec instamaps/maps.cfg
@@ -35,10 +44,3 @@ exec instamaps/maps.cfg
 @option|6 on 6|sv_spectator_slots 4
 @option|7 on 7|sv_spectator_slots 2
 @option|8 on 8|sv_spectator_slots 0
-
-@heading|Gametype
-@option|iCTF|sv_gametype ictf; reload
-@option|gCTF|sv_gametype gctf; reload
-
-@heading|Other
-@option|restart round|restart
