@@ -10,15 +10,9 @@
     "teeworlds": { "git": "git@github.com:unique-clan/teeworlds.git" },
     "ddnet": {
         "git": "git@github.com:ddnet/ddnet.git",
-        "ref": "13.2.2",
+        "ref": "14.1",
         "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
         "make": ["DDNet-Server", "map_convert_07"]
-    },
-    "ddnet7": {
-        "git": "git@github.com:ddnet/ddnet7.git",
-        "ref": "ff0f79581c5f88341bfbf9918cb999ae0f4487e4",
-        "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
-        "make": ["DDNet7-Server"]
     },
     "unique-race": {
         "git": "git@github.com:unique-clan/unique-race.git",
