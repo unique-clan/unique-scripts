@@ -34,7 +34,7 @@ def escape_discord(text):
     return text
 
 def send_discord(msg, key):
-    requests.post('https://discordapp.com/api/webhooks/'+key, data={'content': msg})
+    requests.post('https://discord.com/api/webhooks/'+key, data={'content': msg})
 
 def encode_url(t):
     return urllib.parse.quote(t, safe='')
