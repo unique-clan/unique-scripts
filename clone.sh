@@ -24,6 +24,7 @@ clone()
         --include /bin/twbuildconf \
         --include /bin/twrestart \
         --include /bin/twstop \
+        --include /bin/racerestartwhenempty \
         --include /stdmaps \
         --include /stdmaps/*.cfg.tmpl \
         --include /stdmaps/maps \
@@ -35,6 +36,7 @@ clone()
         --include /race/maps/* \
         --include /race/maps07 \
         --include /race/maps07/* \
+        --include /race/restart_when_empty.py \
         --include /flycfg \
         --include /flycfg/*.cfg.tmpl \
         --include /flycfg/maps \
