@@ -1,7 +1,7 @@
 [
     {
         "name": "GER",
-        "ip": "84.38.65.222",
+        "ip": "88.198.184.126",
         "servers":
         [
             { "port": 8303, "dir": "openfng",   "name": "OpenFNG" },
