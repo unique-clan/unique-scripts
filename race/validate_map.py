@@ -10,7 +10,7 @@ from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX, EXTERNAL_MAPRES
 
 
 # Exceptions:
-# - run_300_from_scratch and run_300_from_hatch use tunes
+# - run_300_from_scratch uses tunes
 # - run_crossover uses weapon tele
 # - ctf1-7 not checked, we can't change standard maps
 
@@ -55,7 +55,7 @@ def validate_settings(t):
     settings = set([s.decode() for s in t.info.settings])
     if not settings or settings == set(['']):
         return
-    if mapname == 'run_300_from_scratch' or mapname == 'run_300_from_hatch':
+    if mapname == 'run_300_from_scratch':
         return
     if gametype == 'race' and settings.issubset(RACE_SETTINGS):
         return
