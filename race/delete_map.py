@@ -52,3 +52,4 @@ with tw.RecordDB() as db:
 
 if deleted_votes:
     subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
+    subprocess.run(os.path.join(tw.racedir, 'clean_ranks.py'))

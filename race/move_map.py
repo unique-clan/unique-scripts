@@ -34,4 +34,4 @@ os.remove(confdest)
 os.symlink(conforg, confdest)
 
 subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
-subprocess.run(os.path.join(tw.racedir, 'clean_worse_ranks.py'))
+subprocess.run(os.path.join(tw.racedir, 'clean_ranks.py'))
