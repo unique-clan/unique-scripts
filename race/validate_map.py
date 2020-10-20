@@ -72,7 +72,7 @@ def validate_mapres(t):
 def validate_layers(t):
     if t.switchlayer:
         crit("Switch layer forbidden")
-    if t.tunelayer and mapname != 'run_300_from_scratch' and mapname != 'run_300_from_hatch':
+    if t.tunelayer and mapname != 'run_300_from_scratch':
         crit("Tune layer forbidden")
 
 def validate_gametiles(t):
