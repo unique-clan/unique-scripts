@@ -2,11 +2,15 @@
 import os
 import sys
 import argparse
+import subprocess
+import re
 
 sys.path.append('/srv/tw/race/tml')
 
 from tml.tml import Teemap
 from tml.constants import TILEINDEX, TELEINDEX, SPEEDUPINDEX, EXTERNAL_MAPRES
+
+import tw
 
 
 # Exceptions:
@@ -166,6 +170,13 @@ def validate_map(path, gtype, only_critical=False):
         validate_gametiles(t)
         validate_teletiles(t)
         validate_speeduptiles(t)
+
+    if show_error:
+        ddnet_build_dir = os.path.join(tw.srcdir, 'ddnet', 'build')
+        p = subprocess.run([os.path.join(ddnet_build_dir, 'map_convert_07'), mappath, '/dev/null'],
+                           cwd=ddnet_build_dir, capture_output=True, text=True)
+        for message in re.findall(f'\[map_convert_07\]: {re.escape(mappath)}: (.*)', p.stdout):
+            err(message)
 
     return success
 

@@ -9,6 +9,7 @@ from validate_map import validate_map
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', '--validate-maps', action='store_true', help="validate map files")
+parser.add_argument('-p', '--pedantic', action='store_true', help="show non-critical errors")
 args = parser.parse_args()
 
 
@@ -104,6 +105,6 @@ if args.validate_maps:
     for mapname, (maplength, mapstars) in votes.items():
         if mapname in maps and not (maplength == 'fastcap' and mapstars == 1):
             mappath = os.path.join(tw.racedir, 'maps', mapname) + '.map'
-            validate_map(mappath, 'fastcap' if votes[mapname][0] == 'fastcap' else 'race', only_critical=True)
+            validate_map(mappath, 'fastcap' if votes[mapname][0] == 'fastcap' else 'race', only_critical=not args.pedantic)
 
 print("There are {} mapvotes in total ({short} short, {middle} middle, {long} long, {fastcap} fastcap)".format(sum(mapcount.values()), **mapcount))

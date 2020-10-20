@@ -10,7 +10,7 @@
     "teeworlds": { "git": "git@github.com:unique-clan/teeworlds.git" },
     "ddnet": {
         "git": "git@github.com:ddnet/ddnet.git",
-        "ref": "14.1",
+        "ref": "15.1.3",
         "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
         "make": ["DDNet-Server", "map_convert_07"]
     },
