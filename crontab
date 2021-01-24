@@ -7,5 +7,6 @@ PYTHONPATH=/srv/tw
 24 3    *  *  * racecleanranks > /dev/null
 
 # Map releases
+#0  19   23 01 * raceaddmap run_4Smash Short GELO
 #0  14   18 11 * raceaddmap ctf_medieval Fastcap chi1 Lord
 #20 19   *  *  * raceaddmap fly4popo Middle SkizZ
