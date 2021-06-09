@@ -19,3 +19,4 @@ server.log.old
 /race/release/
 /race_test/data/maps/
 /src/*/
+ddnet-server.sqlite
