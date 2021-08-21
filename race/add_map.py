@@ -100,7 +100,7 @@ with tw.RecordDB() as db:
 subprocess.run(os.path.join(tw.racedir, 'generate_votes.py'))
 subprocess.run(os.path.join(tw.basedir, 'clone.sh'))
 if not args.no_announce:
-    msg = "@everyone [{}](https://uniqueclan.net/map/{}) ".format(tw.escape_discord(args.mapname), tw.encode_url(args.mapname))
+    msg = "[{}](https://uniqueclan.net/map/{}) ".format(tw.escape_discord(args.mapname), tw.encode_url(args.mapname))
     if args.category == "Fastcap":
         msg += "and **{}** ".format(tw.escape_discord(args.mapname+'_no_wpns'))
     if mapper:

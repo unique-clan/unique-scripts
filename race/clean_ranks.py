@@ -16,7 +16,7 @@ with tw.RecordDB() as db:
         c.execute("DELETE t1 FROM race_lastrecords t1 LEFT JOIN race_maps t2 ON t1.Map = t2.Map WHERE t2.Map IS NULL")
         print("Deleted {} last record entries because of missing maps".format(c.rowcount))
 
-        c.execute("DELETE t1 FROM race_ranks t1 LEFT JOIN race_maps t2 ON t1.Map = t2.Map WHERE t2.Map IS NULL")
+        c.execute("DELETE t1 FROM race_ranks t1 LEFT JOIN race_maps t2 ON t1.Map = t2.Map AND t1.Server = t2.Server WHERE t2.Map IS NULL")
         print("Deleted {} rank cache entries because of missing maps".format(c.rowcount))
 
         c.execute("DELETE t1 FROM race_saves t1 LEFT JOIN race_maps t2 ON t1.Map = t2.Map WHERE t2.Map IS NULL")
