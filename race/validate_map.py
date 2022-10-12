@@ -23,7 +23,7 @@ RACE_SETTINGS   = set(['sv_health_and_ammo 1', 'sv_kill_grenades 1'])
 NOHARM_SETTINGS = set(['sv_delete_grenades_after_death 0', 'sv_infinite_ammo 1', \
     'sv_pickup_respawn -1', 'sv_regen 0', 'sv_rocket_jump_damage 0', \
     'sv_strip 0', 'sv_teleport 0', 'sv_teleport_grenade 0', 'sv_teleport_kill 0', \
-    'sv_teleport_vel_reset 0', 'sv_teleport 1', 'sv_no_items 0'])
+    'sv_teleport_vel_reset 0', 'sv_teleport 1', 'sv_no_items 0', 'tune_zone .*'])
 
 FRONT_TILES  = list(map(TILEINDEX.get, ['air', 'death', 'start', 'finish', \
               'armor', 'health', 'shotgun', 'grenade', 'ninja', 'rifle', \
@@ -61,9 +61,9 @@ def validate_settings(t):
         return
     if mapname == 'run_300_from_scratch':
         return
-    if gametype == 'race' and settings.issubset(RACE_SETTINGS):
+    if gametype == 'race' and all(any(re.match(r, s) for r in RACE_SETTINGS) for s in settings):
         return
-    if settings.issubset(NOHARM_SETTINGS):
+    if all(any(re.match(r, s) for r in NOHARM_SETTINGS) for s in settings):
         err("Invalid server settings")
     else:
         crit("Invalid server settings {}".format(settings - NOHARM_SETTINGS))
@@ -77,7 +77,7 @@ def validate_layers(t):
     if t.switchlayer:
         crit("Switch layer forbidden")
     if t.tunelayer and mapname != 'run_300_from_scratch':
-        crit("Tune layer forbidden")
+        err("Tune layer forbidden")
 
 def validate_gametiles(t):
     spawn_count = 0

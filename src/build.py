@@ -14,7 +14,7 @@ def build(mdir, git, ref=None, make=None, cmake=None):
             run(['git', 'clone', git, mdir], check=True)
         os.chdir(mdir)
         if ref:
-            run(['git', 'fetch'], check=True)
+            run(['git', 'fetch', '--tags'], check=True)
             run(['git', 'checkout', ref], check=True)
         else:
             run(['git', 'pull'], check=True)
