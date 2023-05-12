@@ -7,5 +7,5 @@ When you are rank 1 and the flag feels annoying use /showflag to hide it!
 Use your hammer to display everyones precise time in the scoreboard
 We have a time based point system! Check out /mappoints /points and /top5points
 View the scores and rankings of all players at uniqueclan.net/ranks
-You want to be up to date with new map releases and achieved records? Join the Unique Discord using this link: https://discord.com/invite/FxEG35r
+You want to be up to date with new map releases and achieved records? Join the Unique Discord! URL: https://uniqueclan.net/race
 This server supports 0.6 and 0.7 clients. Use the client you prefer!

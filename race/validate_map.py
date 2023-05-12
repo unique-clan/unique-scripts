@@ -25,10 +25,11 @@ NOHARM_SETTINGS = set(['sv_delete_grenades_after_death 0', 'sv_infinite_ammo 1',
     'sv_strip 0', 'sv_teleport 0', 'sv_teleport_grenade 0', 'sv_teleport_kill 0', \
     'sv_teleport_vel_reset 0', 'sv_teleport 1', 'sv_no_items 0', 'tune_zone .*'])
 
+ENTITIES_OFF_SIGN = [190, 191]
 FRONT_TILES  = list(map(TILEINDEX.get, ['air', 'death', 'start', 'finish', \
               'armor', 'health', 'shotgun', 'grenade', 'ninja', 'rifle', \
-              'stopper', 'stopper_twoway', 'stopper_allway']))
-GAME_TILES   = list(map(TILEINDEX.get, ['solid', 'nohook']))
+              'stopper', 'stopper_twoway', 'stopper_allway'])) + ENTITIES_OFF_SIGN
+GAME_TILES   = list(map(TILEINDEX.get, ['solid', 'nohook'])) + ENTITIES_OFF_SIGN
 NOHARM_TILES = [29, 30, 31, 68, 93, 94, 134, 176]
 
 TELE_TILES   = list(map(TELEINDEX.get, ['air', 'from', 'from_evil', 'to', 'cp', \
