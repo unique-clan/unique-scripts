@@ -38,5 +38,25 @@
             { "port": 8307, "dir": "football1", "name": "Football #1" },
             { "port": 8308, "dir": "football2", "name": "Football #2" }
         ]
+    },
+    {
+        "name": "USA",
+        "ip": "72.204.22.162",
+        "servers":
+        [
+            { "port": 6622, "dir": "openfng",   "name": "OpenFNG" },
+            { "port": 6623, "dir": "boomfng1",   "name": "BoomFNG" },
+            { "port": 6624, "dir": "solofng",   "name": "SoloFNG" },
+            { "port": 6625, "dir": "instagib",  "name": "Instagib" },
+            { "port": 6626, "dir": "monster",   "name": "HMH-Monster" },
+            { "port": 6627, "dir": "freeze",    "name": "FreeZe" },
+            { "port": 6628, "dir": "bomb",      "name": "Bomb" },
+            { "port": 6629, "dir": "race1",     "name": "Unique Race #1" },
+            { "port": 6630, "dir": "race2",     "name": "Unique Race #2" },
+            { "port": 6631, "dir": "teesmash",  "name": "TeeSmash" },
+            { "port": 6632, "dir": "fly",       "name": "Fly" },
+            { "port": 6633, "dir": "football1",  "name": "Football" },
+            { "port": 6634, "dir": "gores",     "name": "Gores" }
+        ]
     }
 ]
