@@ -5,7 +5,7 @@ cd /srv/tw
 
 clone()
 {
-    rsync --archive --compress --progress --delete \
+    rsync -e "ssh -p $2" --archive --progress --delete \
         --include /tw.py \
         --include /build_config.py \
         --include /restart.py \
@@ -55,9 +55,10 @@ clone()
         --exclude '*' \
         /srv/tw/ tw@$1:/srv/tw
 
-    ssh tw@$1 << EOF
+    ssh tw@$1 -p $2 << EOF
 ./build_config.py
 EOF
 }
 
-clone 54.39.96.248
+clone 54.39.96.248 22
+clone 72.204.22.162 6620
