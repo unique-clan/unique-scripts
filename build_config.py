@@ -118,18 +118,8 @@ class Config:
     def _foot(self):
         if self._wrote_heading: self._heading_end()
 
-
-def needs_build(path, cfg_path):
-    if (args.force_build or not os.path.exists(cfg_path) or
-       (os.path.isfile(cfg_path) and os.path.getmtime(path) > os.path.getmtime(cfg_path))):
-        return True
-    else:
-        return False
-
 def handle_template(path):
     cfg_path = path[:-5]
-    if not needs_build(path, cfg_path):
-        return
     with open(path) as cont:
         cfg = Config(cfg_path)
         for line in cont:
@@ -187,12 +177,6 @@ def search(path):
         elif os.path.isfile(f):
             if f.endswith('.cfg.tmpl'):
                 handle_template(f)
-
-
-parser = argparse.ArgumentParser()
-parser.add_argument('-f', '--force-build', action='store_true',
-                    help="force rebuilding config")
-args = parser.parse_args()
 
 print("Building config")
 
