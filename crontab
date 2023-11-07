@@ -6,6 +6,9 @@ PYTHONPATH=/srv/tw
 # Clean up worse ranks every night
 24 3    *  *  * racecleanranks > /dev/null
 
+# Backup
+50 9 1 * * twdbbackup > /dev/null
+
 # Map releases
 #0  18   20 01 * raceaddmap "Power Drill" Short Derp
 #0  19   23 01 * raceaddmap run_4Smash Short GELO
