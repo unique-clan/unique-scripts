@@ -21,10 +21,13 @@ ipt -X
 # drop hostile ips
 #ipt -A INPUT -s 1.2.3.4 -j DROP
 
-# drop teeworlds serverinfo requests
+# drop teeworlds serverinfo and 0.7 new connection requests
 ipt -N TWSERVERINFO
-ipt -A INPUT -p udp --dport 8303:8350 -m string --algo bm --from 34 --to 54 --hex-string '|FF FF FF FF|gie3' -j TWSERVERINFO
-ipt -A INPUT -p udp --dport 8303:8350 -m string --algo bm --from 34 --to 54 --hex-string '|FF FF FF FF|fstd' -j TWSERVERINFO
+#ipt -A INPUT -p udp --dport 8303:8350 -m string --algo bm --from 34 --to 54 --hex-string '|FF FF FF FF|gie3' -j TWSERVERINFO
+#ipt -A INPUT -p udp --dport 8303:8350 -m string --algo bm --from 34 --to 54 --hex-string '|FF FF FF FF|fstd' -j TWSERVERINFO
+ipt -A INPUT -p udp --dport 8303:8350 -m u32 --u32 "0x26=0x67696533" -j TWSERVERINFO
+ipt -A INPUT -p udp --dport 8303:8350 -m u32 --u32 "0x26=0x66737464" -j TWSERVERINFO
+ipt -A INPUT -p udp --dport 8303:8350 -m u32 --u32 "0x20=0x544b454e" -j TWSERVERINFO
 ipt -A TWSERVERINFO \
     -m hashlimit --hashlimit-upto 10/s --hashlimit-burst 60 --hashlimit-mode srcip --hashlimit-name twserverinfo \
     -m limit --limit 100/s --limit-burst 60 -j ACCEPT
