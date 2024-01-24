@@ -41,7 +41,7 @@
     },
     {
         "name": "USA",
-        "ip": "72.204.22.162",
+        "ip": "72.221.41.219",
         "servers":
         [
             { "port": 6622, "dir": "openfng",   "name": "OpenFNG" },
