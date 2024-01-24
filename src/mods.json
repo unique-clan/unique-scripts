@@ -9,7 +9,7 @@
     "teesmash": { "git": "git@github.com:timazuki/TeeSmash.git" },
     "teeworlds": { "git": "git@github.com:unique-clan/teeworlds.git" },
     "ddnet": {
-	"ref": "16.2.2",
+	"ref": "17.1.1",
         "git": "git@github.com:ddnet/ddnet.git",
         "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
         "make": ["DDNet-Server", "map_convert_07"]
