@@ -60,6 +60,16 @@
         ]
     },
     {
+        "name": "RUS",
+        "ip": "62.217.186.19",
+        "servers":
+        [
+            { "port": 8310, "dir": "race1",     "name": "Unique Race #1" },
+            { "port": 8311, "dir": "race2",     "name": "Unique Race #2" },
+            { "port": 8312, "dir": "race3",     "name": "Unique Race #3" }
+        ]
+    },
+    {
         "name": "Taiwan",
         "ip": "38.54.107.120",
         "servers":

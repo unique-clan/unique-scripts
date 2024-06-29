@@ -39,7 +39,7 @@ def build(mdir, git, ref=None, make=None, cmake=None):
         return False
 
 
-success = build('bam', 'git@github.com:matricks/bam.git', ref='v0.4.0', make='./make_unix.sh')
+success = build('bam', 'https://github.com/matricks/bam.git', ref='v0.4.0', make='./make_unix.sh')
 if not success:
     sys.exit()
 

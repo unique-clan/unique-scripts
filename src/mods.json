@@ -1,21 +1,21 @@
 {
-    "bomb": { "git": "git@github.com:unique-clan/bomb.git" },
-    "fly": { "git": "git@github.com:unique-clan/fly.git" },
-    "fng": { "git": "git@github.com:unique-clan/fng.git" },
-    "football": { "git": "git@github.com:unique-clan/football.git" },
-    "freeze": { "git": "git@github.com:timakro/teeworlds-freeze.git" },
-    "instagib": { "git": "git@github.com:unique-clan/instagib.git" },
-    "monster": { "git": "git@github.com:unique-clan/monster.git" },
-    "teesmash": { "git": "git@github.com:timazuki/TeeSmash.git" },
-    "teeworlds": { "git": "git@github.com:unique-clan/teeworlds.git" },
+    "bomb": { "git": "https://github.com/unique-clan/bomb.git" },
+    "fly": { "git": "https://github.com/unique-clan/fly.git" },
+    "fng": { "git": "https://github.com/unique-clan/fng.git" },
+    "football": { "git": "https://github.com/unique-clan/football.git" },
+    "freeze": { "git": "https://github.com/timakro/teeworlds-freeze.git" },
+    "instagib": { "git": "https://github.com/unique-clan/instagib.git" },
+    "monster": { "git": "https://github.com/unique-clan/monster.git" },
+    "teesmash": { "git": "https://github.com/timazuki/TeeSmash.git" },
+    "teeworlds": { "git": "https://github.com/unique-clan/teeworlds.git" },
     "ddnet": {
 	"ref": "17.1.1",
-        "git": "git@github.com:ddnet/ddnet.git",
+        "git": "https://github.com/ddnet/ddnet.git",
         "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
         "make": ["DDNet-Server", "map_convert_07"]
     },
     "unique-race": {
-        "git": "git@github.com:unique-clan/unique-race.git",
+        "git": "https://github.com/unique-clan/unique-race.git",
         "cmake": ["-DCLIENT=OFF", "-DMYSQL=ON"],
         "make": ["DDNet-Server"]
     }

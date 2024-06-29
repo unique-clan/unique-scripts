@@ -5,6 +5,7 @@ cd /srv/tw
 
 clone()
 {
+    echo "====== $3 ======"
     rsync -e "ssh -p $2" --archive --progress --delete \
         --include /tw.py \
         --include /build_config.py \
@@ -52,6 +53,7 @@ clone()
         --include /src \
         --include /src/build.py \
         --include /src/mods.json \
+	--include /local_config.json.default \
         --exclude '*' \
         /srv/tw/ tw@$1:/srv/tw
 
@@ -60,6 +62,7 @@ clone()
 EOF
 }
 
-clone 54.39.96.248 22 # Canada
-clone 104.0.224.113 6620 # USA
-clone 38.54.107.120 22 # Taiwan
+clone 54.39.96.248 22 Canada
+clone 104.0.224.113 6620 USA
+clone 62.217.186.19 8350 Russia
+#clone 38.54.107.120 22 Taiwan
