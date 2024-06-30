@@ -28,6 +28,7 @@
     {
         "name": "CAN",
         "ip": "54.39.96.248",
+        "sponsor": "Fudgy",
         "servers":
         [
             { "port": 8303, "dir": "race1",     "name": "Unique Race #1" },
@@ -41,6 +42,7 @@
     {
         "name": "USA",
         "ip": "104.0.224.113",
+        "sponsor": "Ewan Green",
         "servers":
         [
             { "port": 6629, "dir": "race1",     "name": "Unique Race #1" },
@@ -50,6 +52,7 @@
     {
         "name": "RUS",
         "ip": "62.217.186.19",
+	"sponsor": "gerdoe",
         "servers":
         [
             { "port": 8310, "dir": "race1",     "name": "Unique Race #1" },
@@ -60,6 +63,7 @@
     {
         "name": "Taiwan",
         "ip": "38.54.107.120",
+	"sponsor": "heinrich5991",
         "servers":
         [
             { "port": 8303, "dir": "race1",     "name": "Unique Race #1" },
