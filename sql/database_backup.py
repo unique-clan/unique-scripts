@@ -34,4 +34,4 @@ def clean_backups(prefix):
 
 
 backup('gores', ['race', 'teamrace'])
-backup('race', ['lastrecords', 'maps', 'race', 'saves'])
+backup('race', ['lastrecords', 'maps', 'race'])
