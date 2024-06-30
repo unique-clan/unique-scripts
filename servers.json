@@ -22,8 +22,7 @@
             { "port": 8319, "dir": "race_test", "name": "Unique Race Test" },
             { "port": 8320, "dir": "fly",       "name": "Fly" },
             { "port": 8321, "dir": "football1", "name": "Football #1" },
-            { "port": 8322, "dir": "football2", "name": "Football #2" },
-            { "port": 8323, "dir": "gores",     "name": "Gores" }
+            { "port": 8322, "dir": "football2", "name": "Football #2" }
         ]
     },
     {
