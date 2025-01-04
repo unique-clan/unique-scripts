@@ -63,6 +63,6 @@ EOF
 }
 
 clone 54.39.96.248 22 Canada
-clone 104.0.224.113 6620 USA
+#clone 104.0.224.113 6620 USA
 clone 62.217.186.19 8350 Russia
 #clone 38.54.107.120 22 Taiwan
