@@ -62,7 +62,7 @@ class DBCursor:
 class RecordDB:
 
     def __enter__(self):
-        self.db = MySQLdb.connect(host=config['sql']['ip'], user=config['sql']['user'],
+        self.db = MySQLdb.connect(host=config['sql']['ip'], port=int(config['sql']['port']), user=config['sql']['user'],
                                   passwd=config['sql']['password'], db=config['sql']['database'],
                                   use_unicode=True, charset='utf8')
         return self
